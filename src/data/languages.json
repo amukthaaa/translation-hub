@@ -1,0 +1,10 @@
+[
+  { "code": "es", "name": "Spanish (LatAm)" },
+  { "code": "fr", "name": "French" },
+  { "code": "de", "name": "German" },
+  { "code": "pt-BR", "name": "Portuguese (Brazil)" },
+  { "code": "zh-CN", "name": "Chinese (Simplified)" },
+  { "code": "ja", "name": "Japanese" },
+  { "code": "it", "name": "Italian" },
+  { "code": "ko", "name": "Korean" }
+]

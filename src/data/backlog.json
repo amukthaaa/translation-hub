@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "story": "As a content owner, I want to submit a translation request in one form so I stop chasing people over email.",
+    "priority": "P0",
+    "successMetric": "Time to submit a request is under 2 minutes."
+  },
+  {
+    "id": 2,
+    "story": "As a content owner, I want to see each request's status so I know when content is ready.",
+    "priority": "P0",
+    "successMetric": "Any request's status is visible in 1 click from the dashboard."
+  },
+  {
+    "id": 3,
+    "story": "As a reviewer, I want glossary terms flagged so translations stay consistent.",
+    "priority": "P0",
+    "successMetric": "100% of approved glossary terms are flagged in submitted content."
+  },
+  {
+    "id": 4,
+    "story": "As a translator, I want a screenshot with the text so my wording fits the context.",
+    "priority": "P1",
+    "successMetric": "Screenshot is visible alongside source text on the request detail view."
+  },
+  {
+    "id": 5,
+    "story": "As a product owner, I want overdue requests highlighted and filterable by language so I can spot regional bottlenecks early.",
+    "priority": "P1",
+    "successMetric": "Overdue requests are visible at a glance from the dashboard."
+  }
+]

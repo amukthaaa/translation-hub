@@ -1,0 +1,141 @@
+[
+  {
+    "id": "REQ-1042",
+    "title": "Scroll Compressor Installation Manual — Rev C",
+    "sourceText": "Before installing the scroll compressor, verify that the suction line and discharge pressure gauges are connected correctly. Low superheat readings may indicate a refrigerant charge issue. Allow the condensing unit to equalize for 15 minutes before startup.",
+    "owner": "Dana Whitfield",
+    "priority": "High",
+    "dueDate": "2026-10-20",
+    "createdAt": "2026-09-29",
+    "status": "In Review",
+    "screenshot": true,
+    "languages": [
+      { "code": "es", "status": "In Review", "reviewer": "Mariana Ortiz" },
+      { "code": "fr", "status": "In Review", "reviewer": "Lucas Bernard" },
+      { "code": "de", "status": "In Translation", "reviewer": "Katrin Vogel" }
+    ]
+  },
+  {
+    "id": "REQ-1043",
+    "title": "Condenser Fan Replacement — Quick Reference Card",
+    "sourceText": "If the condenser fan does not spin freely, disconnect power at the unit before servicing. Inspect the evaporator coil for frost buildup, which can signal a subcooling imbalance.",
+    "owner": "Priya Nandakumar",
+    "priority": "Medium",
+    "dueDate": "2026-10-15",
+    "createdAt": "2026-09-22",
+    "status": "In Translation",
+    "screenshot": false,
+    "languages": [
+      { "code": "pt-BR", "status": "In Translation", "reviewer": "Felipe Souza" },
+      { "code": "zh-CN", "status": "Submitted", "reviewer": "Mei Zhang" }
+    ]
+  },
+  {
+    "id": "REQ-1044",
+    "title": "Refrigerant Safety Data Sheet — Web Page Copy",
+    "sourceText": "Always store refrigerant cylinders upright in a ventilated area. Exposure to compressor oil mist should be minimized. Technicians must confirm suction line pressure before opening any fitting.",
+    "owner": "Dana Whitfield",
+    "priority": "High",
+    "dueDate": "2026-10-28",
+    "createdAt": "2026-10-05",
+    "status": "Submitted",
+    "screenshot": true,
+    "languages": [
+      { "code": "de", "status": "Submitted", "reviewer": "Katrin Vogel" },
+      { "code": "ja", "status": "Submitted", "reviewer": "Haruto Sato" },
+      { "code": "ko", "status": "Submitted", "reviewer": "Ji-won Park" }
+    ]
+  },
+  {
+    "id": "REQ-1045",
+    "title": "Spec Sheet: ZP Series Scroll Compressors",
+    "sourceText": "The ZP series scroll compressor delivers higher efficiency across a wide range of condensing unit temperatures. Rated discharge pressure and subcooling targets are listed in Table 3.",
+    "owner": "Marcus Lee",
+    "priority": "Low",
+    "dueDate": "2026-11-10",
+    "createdAt": "2026-10-10",
+    "status": "Published",
+    "screenshot": true,
+    "languages": [
+      { "code": "es", "status": "Published", "reviewer": "Mariana Ortiz" },
+      { "code": "it", "status": "Published", "reviewer": "Giulia Romano" },
+      { "code": "fr", "status": "Published", "reviewer": "Lucas Bernard" }
+    ]
+  },
+  {
+    "id": "REQ-1046",
+    "title": "Field Bulletin: Evaporator Frost Troubleshooting",
+    "sourceText": "Evaporator frost is commonly caused by low refrigerant charge or restricted airflow. Measure superheat at the suction line before condemning the compressor.",
+    "owner": "Priya Nandakumar",
+    "priority": "High",
+    "dueDate": "2026-10-12",
+    "createdAt": "2026-09-18",
+    "status": "In Review",
+    "screenshot": false,
+    "languages": [
+      { "code": "zh-CN", "status": "In Review", "reviewer": "Mei Zhang" },
+      { "code": "ja", "status": "In Translation", "reviewer": "Haruto Sato" }
+    ]
+  },
+  {
+    "id": "REQ-1047",
+    "title": "Marketing One-Pager: Smart Diagnostics Platform",
+    "sourceText": "Our smart diagnostics platform continuously monitors discharge pressure, superheat, and subcooling to flag issues before they become failures. No compressor teardown required.",
+    "owner": "Jordan Reyes",
+    "priority": "Medium",
+    "dueDate": "2026-10-30",
+    "createdAt": "2026-10-14",
+    "status": "In Translation",
+    "screenshot": true,
+    "languages": [
+      { "code": "fr", "status": "In Translation", "reviewer": "Lucas Bernard" },
+      { "code": "de", "status": "In Translation", "reviewer": "Katrin Vogel" },
+      { "code": "pt-BR", "status": "Submitted", "reviewer": "Felipe Souza" }
+    ]
+  },
+  {
+    "id": "REQ-1048",
+    "title": "Training Deck: Condensing Unit Startup Checklist",
+    "sourceText": "Step 1: Confirm the condensing unit is level. Step 2: Verify suction line insulation is intact. Step 3: Record discharge pressure and compare against the spec sheet baseline.",
+    "owner": "Marcus Lee",
+    "priority": "Medium",
+    "dueDate": "2026-10-08",
+    "createdAt": "2026-09-10",
+    "status": "In Translation",
+    "screenshot": false,
+    "languages": [
+      { "code": "ko", "status": "In Translation", "reviewer": "Ji-won Park" },
+      { "code": "zh-CN", "status": "In Translation", "reviewer": "Mei Zhang" }
+    ]
+  },
+  {
+    "id": "REQ-1049",
+    "title": "Warranty Claim Form — Translated Fields",
+    "sourceText": "List the compressor model number, condensing unit serial number, and date of installation. Attach photos of the refrigerant line set if a leak is suspected.",
+    "owner": "Jordan Reyes",
+    "priority": "Low",
+    "dueDate": "2026-11-18",
+    "createdAt": "2026-10-16",
+    "status": "Submitted",
+    "screenshot": false,
+    "languages": [
+      { "code": "es", "status": "Submitted", "reviewer": "Mariana Ortiz" },
+      { "code": "pt-BR", "status": "Submitted", "reviewer": "Felipe Souza" }
+    ]
+  },
+  {
+    "id": "REQ-1050",
+    "title": "Distributor Newsletter: October Product Update",
+    "sourceText": "This month's update covers new scroll compressor packaging and revised condenser fan sourcing. No changes to refrigerant handling procedures.",
+    "owner": "Dana Whitfield",
+    "priority": "Low",
+    "dueDate": "2026-10-05",
+    "createdAt": "2026-09-25",
+    "status": "Published",
+    "screenshot": true,
+    "languages": [
+      { "code": "de", "status": "Published", "reviewer": "Katrin Vogel" },
+      { "code": "it", "status": "Published", "reviewer": "Giulia Romano" }
+    ]
+  }
+]

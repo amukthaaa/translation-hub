@@ -1,0 +1,124 @@
+[
+  {
+    "term": "refrigerant",
+    "category": "HVAC Core",
+    "translations": {
+      "es": "refrigerante",
+      "fr": "frigorigène",
+      "de": "Kältemittel",
+      "pt-BR": "fluido refrigerante",
+      "zh-CN": "制冷剂",
+      "ja": "冷媒",
+      "it": "refrigerante",
+      "ko": "냉매"
+    }
+  },
+  {
+    "term": "compressor",
+    "category": "HVAC Core",
+    "translations": {
+      "es": "compresor",
+      "fr": "compresseur",
+      "de": "Verdichter",
+      "pt-BR": "compressor",
+      "zh-CN": "压缩机",
+      "ja": "コンプレッサー",
+      "it": "compressore",
+      "ko": "압축기"
+    }
+  },
+  {
+    "term": "condensing unit",
+    "category": "HVAC Core",
+    "translations": {
+      "es": "unidad condensadora",
+      "fr": "groupe de condensation",
+      "de": "Verflüssigersatz",
+      "pt-BR": "unidade condensadora",
+      "zh-CN": "冷凝机组",
+      "ja": ""
+    }
+  },
+  {
+    "term": "evaporator",
+    "category": "HVAC Core",
+    "translations": {
+      "es": "evaporador",
+      "fr": "évaporateur",
+      "de": "Verdampfer",
+      "pt-BR": "evaporador",
+      "zh-CN": "蒸发器",
+      "ja": "蒸発器",
+      "it": "evaporatore",
+      "ko": "증발기"
+    }
+  },
+  {
+    "term": "superheat",
+    "category": "Diagnostics",
+    "translations": {
+      "es": "sobrecalentamiento",
+      "fr": "surchauffe",
+      "de": "Überhitzung",
+      "pt-BR": "",
+      "zh-CN": "过热度",
+      "ja": ""
+    }
+  },
+  {
+    "term": "subcooling",
+    "category": "Diagnostics",
+    "translations": {
+      "es": "subenfriamiento",
+      "fr": "sous-refroidissement",
+      "de": "Unterkühlung",
+      "zh-CN": "过冷度"
+    }
+  },
+  {
+    "term": "suction line",
+    "category": "Piping",
+    "translations": {
+      "es": "línea de succión",
+      "fr": "ligne d'aspiration",
+      "de": "Saugleitung",
+      "pt-BR": "linha de sucção",
+      "zh-CN": "吸气管",
+      "it": "linea di aspirazione"
+    }
+  },
+  {
+    "term": "discharge pressure",
+    "category": "Diagnostics",
+    "translations": {
+      "es": "presión de descarga",
+      "fr": "pression de refoulement",
+      "de": "Druckseite",
+      "zh-CN": "排气压力"
+    }
+  },
+  {
+    "term": "scroll compressor",
+    "category": "Product Line",
+    "translations": {
+      "es": "compresor scroll",
+      "fr": "compresseur scroll",
+      "de": "Scrollverdichter",
+      "pt-BR": "compressor scroll",
+      "zh-CN": "涡旋压缩机",
+      "ja": "スクロールコンプレッサー",
+      "it": "compressore scroll",
+      "ko": "스크롤 압축기"
+    }
+  },
+  {
+    "term": "condenser fan",
+    "category": "Components",
+    "translations": {
+      "es": "ventilador del condensador",
+      "fr": "ventilateur du condenseur",
+      "de": "",
+      "pt-BR": "ventilador do condensador"
+    }
+  }
+]

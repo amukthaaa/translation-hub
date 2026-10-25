@@ -1,0 +1,10 @@
+[
+  { "id": "rev-1", "name": "Mariana Ortiz", "language": "es", "region": "Latin America" },
+  { "id": "rev-2", "name": "Lucas Bernard", "language": "fr", "region": "EMEA" },
+  { "id": "rev-3", "name": "Katrin Vogel", "language": "de", "region": "EMEA" },
+  { "id": "rev-4", "name": "Felipe Souza", "language": "pt-BR", "region": "Latin America" },
+  { "id": "rev-5", "name": "Mei Zhang", "language": "zh-CN", "region": "APAC" },
+  { "id": "rev-6", "name": "Haruto Sato", "language": "ja", "region": "APAC" },
+  { "id": "rev-7", "name": "Giulia Romano", "language": "it", "region": "EMEA" },
+  { "id": "rev-8", "name": "Ji-won Park", "language": "ko", "region": "APAC" }
+]
