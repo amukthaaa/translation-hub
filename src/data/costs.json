@@ -6,5 +6,6 @@
   { "code": "zh-CN", "ratePerWord": 0.2 },
   { "code": "ja", "ratePerWord": 0.22 },
   { "code": "it", "ratePerWord": 0.15 },
-  { "code": "ko", "ratePerWord": 0.19 }
+  { "code": "ko", "ratePerWord": 0.19 },
+  { "code": "pl", "ratePerWord": 0.17 }
 ]

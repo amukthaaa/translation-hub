@@ -10,7 +10,8 @@
       "zh-CN": "制冷剂",
       "ja": "冷媒",
       "it": "refrigerante",
-      "ko": "냉매"
+      "ko": "냉매",
+      "pl": "czynnik chłodniczy"
     }
   },
   {
@@ -24,7 +25,8 @@
       "zh-CN": "压缩机",
       "ja": "コンプレッサー",
       "it": "compressore",
-      "ko": "압축기"
+      "ko": "압축기",
+      "pl": "sprężarka"
     }
   },
   {
@@ -36,7 +38,8 @@
       "de": "Verflüssigersatz",
       "pt-BR": "unidade condensadora",
       "zh-CN": "冷凝机组",
-      "ja": ""
+      "ja": "",
+      "pl": "agregat skraplający"
     }
   },
   {
@@ -50,7 +53,8 @@
       "zh-CN": "蒸发器",
       "ja": "蒸発器",
       "it": "evaporatore",
-      "ko": "증발기"
+      "ko": "증발기",
+      "pl": "parownik"
     }
   },
   {
@@ -62,7 +66,8 @@
       "de": "Überhitzung",
       "pt-BR": "",
       "zh-CN": "过热度",
-      "ja": ""
+      "ja": "",
+      "pl": "przegrzanie"
     }
   },
   {
@@ -72,7 +77,8 @@
       "es": "subenfriamiento",
       "fr": "sous-refroidissement",
       "de": "Unterkühlung",
-      "zh-CN": "过冷度"
+      "zh-CN": "过冷度",
+      "pl": "przechłodzenie"
     }
   },
   {
@@ -84,7 +90,8 @@
       "de": "Saugleitung",
       "pt-BR": "linha de sucção",
       "zh-CN": "吸气管",
-      "it": "linea di aspirazione"
+      "it": "linea di aspirazione",
+      "pl": "przewód ssawny"
     }
   },
   {
@@ -108,7 +115,8 @@
       "zh-CN": "涡旋压缩机",
       "ja": "スクロールコンプレッサー",
       "it": "compressore scroll",
-      "ko": "스크롤 압축기"
+      "ko": "스크롤 압축기",
+      "pl": "sprężarka spiralna"
     }
   },
   {

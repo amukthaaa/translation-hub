@@ -6,5 +6,6 @@
   { "code": "zh-CN", "name": "Chinese (Simplified)" },
   { "code": "ja", "name": "Japanese" },
   { "code": "it", "name": "Italian" },
-  { "code": "ko", "name": "Korean" }
+  { "code": "ko", "name": "Korean" },
+  { "code": "pl", "name": "Polish" }
 ]
