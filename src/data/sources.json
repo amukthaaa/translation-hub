@@ -1,0 +1,6 @@
+[
+  { "code": "PIM", "name": "PIM", "description": "Product Information Management" },
+  { "code": "DAM", "name": "DAM", "description": "Digital Asset Management" },
+  { "code": "Web", "name": "Web", "description": "Web pages / CMS" },
+  { "code": "Commerce", "name": "Commerce", "description": "Commerce platform" }
+]

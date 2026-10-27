@@ -4,6 +4,8 @@ import { Globe2 } from "lucide-react";
 const navItems = [
   { to: "/", label: "Dashboard", end: true },
   { to: "/new", label: "New Request" },
+  { to: "/metrics", label: "Metrics" },
+  { to: "/admin", label: "Admin" },
   { to: "/backlog", label: "Backlog" },
 ];
 

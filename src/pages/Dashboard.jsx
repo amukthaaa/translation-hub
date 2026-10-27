@@ -2,29 +2,35 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
 import StatusBadge from "../components/StatusBadge";
+import OnboardingNote from "../components/OnboardingNote";
 import languages from "../data/languages.json";
+import sources from "../data/sources.json";
 import { AlertTriangle } from "lucide-react";
 
 const STATUSES = ["Submitted", "In Translation", "In Review", "Published"];
-const TODAY = new Date("2026-10-24");
+const TODAY = new Date();
 
 function isOverdue(request) {
   if (request.status === "Published") return false;
   return new Date(request.dueDate) < TODAY;
 }
 
+const currency = (n) => `$${n.toFixed(2)}`;
+
 export default function Dashboard() {
   const { requests } = useRequests();
   const [statusFilter, setStatusFilter] = useState("All");
   const [languageFilter, setLanguageFilter] = useState("All");
+  const [sourceFilter, setSourceFilter] = useState("All");
 
   const filtered = useMemo(() => {
     return requests.filter((r) => {
       const statusOk = statusFilter === "All" || r.status === statusFilter;
       const langOk = languageFilter === "All" || r.languages.some((l) => l.code === languageFilter);
-      return statusOk && langOk;
+      const sourceOk = sourceFilter === "All" || r.source === sourceFilter;
+      return statusOk && langOk && sourceOk;
     });
-  }, [requests, statusFilter, languageFilter]);
+  }, [requests, statusFilter, languageFilter, sourceFilter]);
 
   const overdueCount = requests.filter(isOverdue).length;
 
@@ -49,6 +55,8 @@ export default function Dashboard() {
           + New Request
         </Link>
       </div>
+
+      <OnboardingNote />
 
       <div className="flex gap-3 mb-4">
         <select
@@ -75,17 +83,30 @@ export default function Dashboard() {
             </option>
           ))}
         </select>
+        <select
+          value={sourceFilter}
+          onChange={(e) => setSourceFilter(e.target.value)}
+          className="border border-slate-300 rounded-md px-3 py-2 text-sm bg-white"
+        >
+          <option value="All">All sources</option>
+          {sources.map((s) => (
+            <option key={s.code} value={s.code}>
+              {s.name}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
+      <div className="bg-white rounded-lg border border-slate-200 overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-slate-50 border-b border-slate-200 text-left text-slate-500">
             <tr>
               <th className="px-4 py-3 font-medium">Title</th>
+              <th className="px-4 py-3 font-medium">Source</th>
               <th className="px-4 py-3 font-medium">Languages</th>
               <th className="px-4 py-3 font-medium">Owner</th>
               <th className="px-4 py-3 font-medium">Due Date</th>
-              <th className="px-4 py-3 font-medium">Priority</th>
+              <th className="px-4 py-3 font-medium">Est. Cost</th>
               <th className="px-4 py-3 font-medium">Status</th>
             </tr>
           </thead>
@@ -105,6 +126,7 @@ export default function Dashboard() {
                     </Link>
                     <div className="text-xs text-slate-400">{r.id}</div>
                   </td>
+                  <td className="px-4 py-3 text-slate-600">{r.source}</td>
                   <td className="px-4 py-3 text-slate-600">
                     {r.languages.map((l) => l.code).join(", ")}
                   </td>
@@ -113,7 +135,7 @@ export default function Dashboard() {
                     {r.dueDate}
                     {overdue && " (overdue)"}
                   </td>
-                  <td className="px-4 py-3 text-slate-600">{r.priority}</td>
+                  <td className="px-4 py-3 text-slate-600">{currency(r.estimatedCost ?? 0)}</td>
                   <td className="px-4 py-3">
                     <StatusBadge status={r.status} />
                   </td>
@@ -122,7 +144,7 @@ export default function Dashboard() {
             })}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-10 text-center text-slate-400">
+                <td colSpan={7} className="px-4 py-10 text-center text-slate-400">
                   No requests match these filters.
                 </td>
               </tr>

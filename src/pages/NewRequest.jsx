@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
 import languages from "../data/languages.json";
 import glossary from "../data/glossary.json";
+import sources from "../data/sources.json";
+import costs from "../data/costs.json";
 import { glossaryCoverage } from "../utils/glossary";
 import HighlightedText from "../components/HighlightedText";
 import { UploadCloud, ImagePlus, AlertTriangle, CheckCircle2 } from "lucide-react";
@@ -19,6 +21,7 @@ export default function NewRequest() {
   const [selectedLanguages, setSelectedLanguages] = useState([]);
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("Medium");
+  const [source, setSource] = useState(sources[0].code);
   const [owner, setOwner] = useState("");
   const [screenshotAttached, setScreenshotAttached] = useState(false);
   const [submitted, setSubmitted] = useState(null);
@@ -30,6 +33,13 @@ export default function NewRequest() {
   const coverage = useMemo(
     () => (sourceText.trim() ? glossaryCoverage(sourceText, glossary, selectedLanguages) : []),
     [sourceText, selectedLanguages]
+  );
+
+  const rateByCode = useMemo(() => Object.fromEntries(costs.map((c) => [c.code, c.ratePerWord])), []);
+  const wordCount = sourceText.trim() ? sourceText.trim().split(/\s+/).filter(Boolean).length : 0;
+  const estimatedCostPreview = selectedLanguages.reduce(
+    (sum, code) => sum + wordCount * (rateByCode[code] ?? 0.15),
+    0
   );
 
   const handleFileUpload = (e) => {
@@ -52,6 +62,7 @@ export default function NewRequest() {
       owner: owner.trim(),
       priority,
       dueDate,
+      source,
       screenshot: screenshotAttached,
       languageCodes: selectedLanguages,
     });
@@ -168,6 +179,28 @@ export default function NewRequest() {
                   {l.name}
                 </label>
               ))}
+            </div>
+            {selectedLanguages.length > 0 && wordCount > 0 && (
+              <p className="text-xs text-slate-400 mt-2">
+                Estimated cost: <span className="font-medium text-slate-600">${estimatedCostPreview.toFixed(2)}</span> ({wordCount} words across {selectedLanguages.length} language{selectedLanguages.length > 1 ? "s" : ""})
+              </p>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Content source</label>
+              <select
+                value={source}
+                onChange={(e) => setSource(e.target.value)}
+                className="w-full border border-slate-300 rounded-md px-3 py-2 text-sm bg-white"
+              >
+                {sources.map((s) => (
+                  <option key={s.code} value={s.code}>
+                    {s.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 

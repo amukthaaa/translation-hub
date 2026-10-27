@@ -3,6 +3,7 @@ import backlog from "../data/backlog.json";
 const PRIORITY_STYLES = {
   P0: "bg-red-100 text-red-700 border-red-300",
   P1: "bg-blue-100 text-blue-700 border-blue-300",
+  P2: "bg-slate-100 text-slate-700 border-slate-300",
 };
 
 export default function Backlog() {

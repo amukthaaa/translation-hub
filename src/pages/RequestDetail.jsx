@@ -43,6 +43,9 @@ export default function RequestDetail() {
           <p className="text-sm text-slate-400 mt-1">
             {request.id} · Owner {request.owner} · Due {request.dueDate} · Priority {request.priority}
           </p>
+          <p className="text-sm text-slate-400 mt-1">
+            Source {request.source} · Order ref {request.orderRef} · Est. cost ${request.estimatedCost?.toFixed(2)}
+          </p>
         </div>
         <StatusBadge status={request.status} />
       </div>
@@ -114,6 +117,7 @@ export default function RequestDetail() {
                   <div>
                     <p className="text-sm font-medium text-slate-700">{languageName(l.code)}</p>
                     <p className="text-xs text-slate-400">{l.reviewer || "Unassigned"}</p>
+                    <p className="text-xs text-slate-400">${l.cost?.toFixed(2) ?? "0.00"}</p>
                   </div>
                   <StatusBadge status={l.status} />
                 </div>

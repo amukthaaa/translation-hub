@@ -10,10 +10,29 @@
     "status": "In Review",
     "screenshot": true,
     "languages": [
-      { "code": "es", "status": "In Review", "reviewer": "Mariana Ortiz" },
-      { "code": "fr", "status": "In Review", "reviewer": "Lucas Bernard" },
-      { "code": "de", "status": "In Translation", "reviewer": "Katrin Vogel" }
-    ]
+      {
+        "code": "es",
+        "status": "In Review",
+        "reviewer": "Mariana Ortiz",
+        "cost": 5.18
+      },
+      {
+        "code": "fr",
+        "status": "In Review",
+        "reviewer": "Lucas Bernard",
+        "cost": 5.92
+      },
+      {
+        "code": "de",
+        "status": "In Translation",
+        "reviewer": "Katrin Vogel",
+        "cost": 6.66
+      }
+    ],
+    "source": "PIM",
+    "wordCount": 37,
+    "estimatedCost": 17.76,
+    "orderRef": "PO-48201"
   },
   {
     "id": "REQ-1043",
@@ -26,9 +45,23 @@
     "status": "In Translation",
     "screenshot": false,
     "languages": [
-      { "code": "pt-BR", "status": "In Translation", "reviewer": "Felipe Souza" },
-      { "code": "zh-CN", "status": "Submitted", "reviewer": "Mei Zhang" }
-    ]
+      {
+        "code": "pt-BR",
+        "status": "In Translation",
+        "reviewer": "Felipe Souza",
+        "cost": 3.64
+      },
+      {
+        "code": "zh-CN",
+        "status": "Submitted",
+        "reviewer": "Mei Zhang",
+        "cost": 5.6
+      }
+    ],
+    "source": "DAM",
+    "wordCount": 28,
+    "estimatedCost": 9.24,
+    "orderRef": "PO-48212"
   },
   {
     "id": "REQ-1044",
@@ -41,10 +74,29 @@
     "status": "Submitted",
     "screenshot": true,
     "languages": [
-      { "code": "de", "status": "Submitted", "reviewer": "Katrin Vogel" },
-      { "code": "ja", "status": "Submitted", "reviewer": "Haruto Sato" },
-      { "code": "ko", "status": "Submitted", "reviewer": "Ji-won Park" }
-    ]
+      {
+        "code": "de",
+        "status": "Submitted",
+        "reviewer": "Katrin Vogel",
+        "cost": 4.86
+      },
+      {
+        "code": "ja",
+        "status": "Submitted",
+        "reviewer": "Haruto Sato",
+        "cost": 5.94
+      },
+      {
+        "code": "ko",
+        "status": "Submitted",
+        "reviewer": "Ji-won Park",
+        "cost": 5.13
+      }
+    ],
+    "source": "Web",
+    "wordCount": 27,
+    "estimatedCost": 15.93,
+    "orderRef": "PO-48230"
   },
   {
     "id": "REQ-1045",
@@ -57,10 +109,32 @@
     "status": "Published",
     "screenshot": true,
     "languages": [
-      { "code": "es", "status": "Published", "reviewer": "Mariana Ortiz" },
-      { "code": "it", "status": "Published", "reviewer": "Giulia Romano" },
-      { "code": "fr", "status": "Published", "reviewer": "Lucas Bernard" }
-    ]
+      {
+        "code": "es",
+        "status": "Published",
+        "reviewer": "Mariana Ortiz",
+        "cost": 3.78,
+        "completedAt": "2026-10-17"
+      },
+      {
+        "code": "it",
+        "status": "Published",
+        "reviewer": "Giulia Romano",
+        "cost": 4.05,
+        "completedAt": "2026-10-19"
+      },
+      {
+        "code": "fr",
+        "status": "Published",
+        "reviewer": "Lucas Bernard",
+        "cost": 4.32,
+        "completedAt": "2026-10-18"
+      }
+    ],
+    "source": "PIM",
+    "wordCount": 27,
+    "estimatedCost": 12.15,
+    "orderRef": "PO-48177"
   },
   {
     "id": "REQ-1046",
@@ -73,9 +147,23 @@
     "status": "In Review",
     "screenshot": false,
     "languages": [
-      { "code": "zh-CN", "status": "In Review", "reviewer": "Mei Zhang" },
-      { "code": "ja", "status": "In Translation", "reviewer": "Haruto Sato" }
-    ]
+      {
+        "code": "zh-CN",
+        "status": "In Review",
+        "reviewer": "Mei Zhang",
+        "cost": 4.4
+      },
+      {
+        "code": "ja",
+        "status": "In Translation",
+        "reviewer": "Haruto Sato",
+        "cost": 4.84
+      }
+    ],
+    "source": "DAM",
+    "wordCount": 22,
+    "estimatedCost": 9.24,
+    "orderRef": "PO-48165"
   },
   {
     "id": "REQ-1047",
@@ -88,10 +176,29 @@
     "status": "In Translation",
     "screenshot": true,
     "languages": [
-      { "code": "fr", "status": "In Translation", "reviewer": "Lucas Bernard" },
-      { "code": "de", "status": "In Translation", "reviewer": "Katrin Vogel" },
-      { "code": "pt-BR", "status": "Submitted", "reviewer": "Felipe Souza" }
-    ]
+      {
+        "code": "fr",
+        "status": "In Translation",
+        "reviewer": "Lucas Bernard",
+        "cost": 3.52
+      },
+      {
+        "code": "de",
+        "status": "In Translation",
+        "reviewer": "Katrin Vogel",
+        "cost": 3.96
+      },
+      {
+        "code": "pt-BR",
+        "status": "Submitted",
+        "reviewer": "Felipe Souza",
+        "cost": 2.86
+      }
+    ],
+    "source": "DAM",
+    "wordCount": 22,
+    "estimatedCost": 10.34,
+    "orderRef": "PO-48241"
   },
   {
     "id": "REQ-1048",
@@ -104,9 +211,23 @@
     "status": "In Translation",
     "screenshot": false,
     "languages": [
-      { "code": "ko", "status": "In Translation", "reviewer": "Ji-won Park" },
-      { "code": "zh-CN", "status": "In Translation", "reviewer": "Mei Zhang" }
-    ]
+      {
+        "code": "ko",
+        "status": "In Translation",
+        "reviewer": "Ji-won Park",
+        "cost": 5.32
+      },
+      {
+        "code": "zh-CN",
+        "status": "In Translation",
+        "reviewer": "Mei Zhang",
+        "cost": 5.6
+      }
+    ],
+    "source": "DAM",
+    "wordCount": 28,
+    "estimatedCost": 10.92,
+    "orderRef": "PO-48150"
   },
   {
     "id": "REQ-1049",
@@ -119,9 +240,23 @@
     "status": "Submitted",
     "screenshot": false,
     "languages": [
-      { "code": "es", "status": "Submitted", "reviewer": "Mariana Ortiz" },
-      { "code": "pt-BR", "status": "Submitted", "reviewer": "Felipe Souza" }
-    ]
+      {
+        "code": "es",
+        "status": "Submitted",
+        "reviewer": "Mariana Ortiz",
+        "cost": 3.5
+      },
+      {
+        "code": "pt-BR",
+        "status": "Submitted",
+        "reviewer": "Felipe Souza",
+        "cost": 3.25
+      }
+    ],
+    "source": "Commerce",
+    "wordCount": 25,
+    "estimatedCost": 6.75,
+    "orderRef": "PO-48255"
   },
   {
     "id": "REQ-1050",
@@ -134,8 +269,24 @@
     "status": "Published",
     "screenshot": true,
     "languages": [
-      { "code": "de", "status": "Published", "reviewer": "Katrin Vogel" },
-      { "code": "it", "status": "Published", "reviewer": "Giulia Romano" }
-    ]
+      {
+        "code": "de",
+        "status": "Published",
+        "reviewer": "Katrin Vogel",
+        "cost": 3.42,
+        "completedAt": "2026-10-01"
+      },
+      {
+        "code": "it",
+        "status": "Published",
+        "reviewer": "Giulia Romano",
+        "cost": 2.85,
+        "completedAt": "2026-10-02"
+      }
+    ],
+    "source": "Web",
+    "wordCount": 19,
+    "estimatedCost": 6.27,
+    "orderRef": "PO-48190"
   }
 ]

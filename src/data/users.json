@@ -1,0 +1,23 @@
+[
+  { "id": "u-1", "name": "Dana Whitfield", "email": "dana.whitfield@copeland.com", "role": "Requester", "team": "Marketing", "active": true },
+  { "id": "u-2", "name": "Priya Nandakumar", "email": "priya.nandakumar@copeland.com", "role": "Requester", "team": "Product", "active": true },
+  { "id": "u-3", "name": "Marcus Lee", "email": "marcus.lee@copeland.com", "role": "Requester", "team": "Technical Docs", "active": true },
+  { "id": "u-4", "name": "Jordan Reyes", "email": "jordan.reyes@copeland.com", "role": "Requester", "team": "Commerce", "active": true },
+  { "id": "u-5", "name": "Amuktha Kotamsetty", "email": "kotamsetty.a@northeastern.edu", "role": "Admin", "team": "Product", "active": true },
+  { "id": "u-6", "name": "Mariana Ortiz", "email": "mariana.ortiz@copeland.com", "role": "Reviewer", "language": "es", "region": "Latin America", "active": true },
+  { "id": "u-7", "name": "Lucas Bernard", "email": "lucas.bernard@copeland.com", "role": "Reviewer", "language": "fr", "region": "EMEA", "active": true },
+  { "id": "u-8", "name": "Katrin Vogel", "email": "katrin.vogel@copeland.com", "role": "Reviewer", "language": "de", "region": "EMEA", "active": true },
+  { "id": "u-9", "name": "Felipe Souza", "email": "felipe.souza@copeland.com", "role": "Reviewer", "language": "pt-BR", "region": "Latin America", "active": true },
+  { "id": "u-10", "name": "Mei Zhang", "email": "mei.zhang@copeland.com", "role": "Reviewer", "language": "zh-CN", "region": "APAC", "active": true },
+  { "id": "u-11", "name": "Haruto Sato", "email": "haruto.sato@copeland.com", "role": "Reviewer", "language": "ja", "region": "APAC", "active": true },
+  { "id": "u-12", "name": "Giulia Romano", "email": "giulia.romano@copeland.com", "role": "Reviewer", "language": "it", "region": "EMEA", "active": true },
+  { "id": "u-13", "name": "Ji-won Park", "email": "jiwon.park@copeland.com", "role": "Reviewer", "language": "ko", "region": "APAC", "active": true },
+  { "id": "u-14", "name": "Carlos Medina", "email": "carlos.medina@vendor.com", "role": "Translator", "language": "es", "active": true },
+  { "id": "u-15", "name": "Anne Dubois", "email": "anne.dubois@vendor.com", "role": "Translator", "language": "fr", "active": true },
+  { "id": "u-16", "name": "Stefan Brandt", "email": "stefan.brandt@vendor.com", "role": "Translator", "language": "de", "active": true },
+  { "id": "u-17", "name": "Renata Lima", "email": "renata.lima@vendor.com", "role": "Translator", "language": "pt-BR", "active": true },
+  { "id": "u-18", "name": "Wei Chen", "email": "wei.chen@vendor.com", "role": "Translator", "language": "zh-CN", "active": true },
+  { "id": "u-19", "name": "Yuki Tanaka", "email": "yuki.tanaka@vendor.com", "role": "Translator", "language": "ja", "active": true },
+  { "id": "u-20", "name": "Marco Conti", "email": "marco.conti@vendor.com", "role": "Translator", "language": "it", "active": false },
+  { "id": "u-21", "name": "Soo-jin Kim", "email": "soojin.kim@vendor.com", "role": "Translator", "language": "ko", "active": true }
+]
