@@ -9,7 +9,7 @@ import costs from "../data/costs.json";
 import { glossaryCoverage } from "../utils/glossary";
 import HighlightedText from "../components/HighlightedText";
 import Select from "../components/Select";
-import { UploadCloud, ImagePlus, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { UploadCloud, ImagePlus, AlertTriangle, CheckCircle2, X } from "lucide-react";
 
 const PRIORITIES = ["Low", "Medium", "High"];
 
@@ -26,7 +26,8 @@ export default function NewRequest() {
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [source, setSource] = useState(sources[0].code);
-  const [screenshotAttached, setScreenshotAttached] = useState(false);
+  const [screenshotUrl, setScreenshotUrl] = useState(null);
+  const [screenshotName, setScreenshotName] = useState(null);
   const [submitted, setSubmitted] = useState(null);
 
   const toggleLanguage = (code) => {
@@ -54,6 +55,18 @@ export default function NewRequest() {
     }
   };
 
+  const handleScreenshotUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setScreenshotUrl(URL.createObjectURL(file));
+    setScreenshotName(file.name);
+  };
+
+  const handleRemoveScreenshot = () => {
+    setScreenshotUrl(null);
+    setScreenshotName(null);
+  };
+
   const canSubmit = title.trim() && sourceText.trim() && selectedLanguages.length > 0 && dueDate;
 
   const handleSubmit = (e) => {
@@ -66,7 +79,8 @@ export default function NewRequest() {
       priority,
       dueDate,
       source,
-      screenshot: screenshotAttached,
+      screenshotUrl,
+      screenshotName,
       languageCodes: selectedLanguages,
     });
     setSubmitted(id);
@@ -213,20 +227,30 @@ export default function NewRequest() {
             </div>
 
             <div>
-              <label
-                className={`flex items-center gap-2 border rounded-md px-3 py-2 text-sm cursor-pointer w-fit ${
-                  screenshotAttached ? "border-copeland-blue bg-blue-50 text-copeland-navy" : "border-slate-200 text-slate-600"
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={screenshotAttached}
-                  onChange={(e) => setScreenshotAttached(e.target.checked)}
-                  className="accent-copeland-blue"
-                />
-                <ImagePlus className="h-4 w-4" />
-                Attach a screenshot for context (optional)
-              </label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Context screenshot (optional)</label>
+              <div className="flex items-center gap-3">
+                <label className="inline-flex items-center gap-2 border border-slate-300 rounded-md px-3 py-2 text-sm text-slate-600 cursor-pointer hover:bg-slate-50 w-fit">
+                  <ImagePlus className="h-4 w-4" />
+                  {screenshotName ? "Replace screenshot" : "Upload a screenshot"}
+                  <input type="file" accept="image/*" className="hidden" onChange={handleScreenshotUpload} />
+                </label>
+                {screenshotName && (
+                  <span className="inline-flex items-center gap-1 text-xs text-slate-500">
+                    {screenshotName}
+                    <button
+                      type="button"
+                      onClick={handleRemoveScreenshot}
+                      className="text-slate-400 hover:text-red-600"
+                      aria-label="Remove screenshot"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  </span>
+                )}
+              </div>
+              {screenshotUrl && (
+                <img src={screenshotUrl} alt="Screenshot preview" className="mt-2 max-h-32 rounded-md border border-slate-200" />
+              )}
             </div>
           </div>
 

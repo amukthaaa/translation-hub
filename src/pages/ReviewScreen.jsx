@@ -115,10 +115,10 @@ export default function ReviewScreen() {
         </div>
 
         <div className="space-y-6">
-          {request.screenshot && (
+          {(request.screenshot || request.screenshotUrl) && (
             <div>
               <h3 className="text-sm font-medium text-slate-700 mb-2">Context screenshot</h3>
-              <ScreenshotPlaceholder title={request.title} />
+              <ScreenshotPlaceholder title={request.title} src={request.screenshotUrl} />
             </div>
           )}
 
