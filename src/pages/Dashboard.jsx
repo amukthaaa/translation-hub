@@ -43,7 +43,7 @@ export default function Dashboard() {
           <p className="text-sm text-slate-500 mt-1">
             {requests.length} total requests
             {overdueCount > 0 && (
-              <span className="ml-2 inline-flex items-center gap-1 text-red-600 font-medium">
+              <span className="ml-2 inline-flex items-center gap-1 rounded-full border border-red-300 bg-red-100 text-red-700 px-2.5 py-0.5 text-xs font-medium whitespace-nowrap">
                 <AlertTriangle className="h-3.5 w-3.5" /> {overdueCount} overdue
               </span>
             )}
