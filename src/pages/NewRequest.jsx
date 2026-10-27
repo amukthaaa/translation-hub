@@ -85,7 +85,7 @@ export default function NewRequest() {
             View request
           </button>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/dashboard")}
             className="border border-slate-300 px-4 py-2 rounded-md text-sm font-medium text-slate-600 hover:bg-slate-50"
           >
             Back to dashboard

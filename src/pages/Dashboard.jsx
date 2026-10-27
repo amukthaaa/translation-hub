@@ -49,7 +49,7 @@ export default function Dashboard() {
           </p>
         </div>
         <Link
-          to="/new"
+          to="/new-request"
           className="bg-copeland-blue text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-copeland-navy transition-colors"
         >
           + New Request

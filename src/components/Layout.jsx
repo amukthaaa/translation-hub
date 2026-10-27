@@ -2,8 +2,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import { Globe2 } from "lucide-react";
 
 const navItems = [
-  { to: "/", label: "Dashboard", end: true },
-  { to: "/new", label: "New Request" },
+  { to: "/dashboard", label: "Dashboard" },
+  { to: "/new-request", label: "New Request" },
   { to: "/metrics", label: "Metrics" },
   { to: "/admin", label: "Admin" },
   { to: "/backlog", label: "Backlog" },

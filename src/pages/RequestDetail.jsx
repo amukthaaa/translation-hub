@@ -19,7 +19,7 @@ export default function RequestDetail() {
     return (
       <div className="text-center py-20">
         <p className="text-slate-500">Request {id} was not found.</p>
-        <Link to="/" className="text-copeland-blue hover:underline text-sm">
+        <Link to="/dashboard" className="text-copeland-blue hover:underline text-sm">
           Back to dashboard
         </Link>
       </div>
@@ -33,7 +33,7 @@ export default function RequestDetail() {
 
   return (
     <div>
-      <Link to="/" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-4">
+      <Link to="/dashboard" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-4">
         <ArrowLeft className="h-4 w-4" /> Back to dashboard
       </Link>
 
