@@ -8,3 +8,9 @@ body {
   background-color: #f4f6f8;
   color: #1a1f27;
 }
+
+main h1,
+main h2,
+main h3 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
