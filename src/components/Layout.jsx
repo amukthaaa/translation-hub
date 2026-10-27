@@ -12,7 +12,10 @@ const navItems = [
 export default function Layout() {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-copeland-navy text-white">
+      <header
+        className="bg-copeland-navy text-white"
+        style={{ fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif" }}
+      >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src={copelandLogo} alt="Copeland" className="h-12 w-12 rounded-md" />
