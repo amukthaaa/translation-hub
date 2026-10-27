@@ -164,6 +164,10 @@ export function RequestsProvider({ children }) {
     updateLanguage(requestId, code, { needsAttention: false });
   };
 
+  const markJobViewed = (requestId, code) => {
+    updateLanguage(requestId, code, { viewed: true });
+  };
+
   const value = useMemo(
     () => ({
       requests,
@@ -175,6 +179,7 @@ export function RequestsProvider({ children }) {
       replyToComment,
       updateRequest,
       acknowledgeUpdate,
+      markJobViewed,
     }),
     [requests]
   );

@@ -16,7 +16,7 @@ const languageName = (code) => languages.find((l) => l.code === code)?.name || c
 
 export default function JobWorkspace() {
   const { id, lang } = useParams();
-  const { requests, saveDraft, submitForReview, replyToComment, acknowledgeUpdate } = useRequests();
+  const { requests, saveDraft, submitForReview, replyToComment, acknowledgeUpdate, markJobViewed } = useRequests();
   const { terms: glossary } = useGlossary();
   const { persona } = useAuth();
   const navigate = useNavigate();
@@ -36,6 +36,13 @@ export default function JobWorkspace() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [request?.id, lang, langEntry?.needsAttention]);
+
+  useEffect(() => {
+    if (request && !langEntry?.viewed) {
+      markJobViewed(request.id, lang);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [request?.id, lang, langEntry?.viewed]);
 
   if (!request || !langEntry) {
     return (

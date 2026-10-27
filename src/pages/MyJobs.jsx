@@ -48,8 +48,10 @@ export default function MyJobs() {
       return statusOk && priorityOk;
     });
     const compare = COMPARATORS[sortBy];
+    const isNew = ({ lang }) => lang.status === "Submitted" && !lang.viewed;
     return filtered.sort((a, b) => {
       if (!!a.lang.needsAttention !== !!b.lang.needsAttention) return a.lang.needsAttention ? -1 : 1;
+      if (isNew(a) !== isNew(b)) return isNew(a) ? -1 : 1;
       return compare(a, b);
     });
   }, [requests, persona, sortBy, statusFilter, priorityFilter]);
@@ -130,7 +132,14 @@ export default function MyJobs() {
                       </span>
                     )}
                   </div>
-                  <div className="text-xs text-slate-400">{request.id}</div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-slate-400">{request.id}</span>
+                    {lang.status === "Submitted" && !lang.viewed && (
+                      <span className="inline-flex items-center rounded-full border border-blue-300 bg-blue-100 text-blue-800 px-2 py-0.5 text-[10px] font-medium whitespace-nowrap">
+                        New
+                      </span>
+                    )}
+                  </div>
                 </td>
                 <td className="px-4 py-3 text-slate-600">English → {languageName(lang.code)}</td>
                 <td className="px-4 py-3 text-slate-600">{request.wordCount}</td>
