@@ -40,10 +40,10 @@ export default function Dashboard() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-medium text-slate-900">Status Dashboard</h2>
-          <p className="text-sm text-slate-500 mt-1">
-            {requests.length} total requests
+          <p className="text-sm text-slate-500 mt-1 flex items-center gap-2">
+            <span>{requests.length} total requests</span>
             {overdueCount > 0 && (
-              <span className="ml-2 inline-flex items-center gap-1 rounded-full border border-red-300 bg-red-100 text-red-700 px-2.5 py-0.5 text-xs font-medium whitespace-nowrap">
+              <span className="inline-flex items-center gap-1 rounded-full border border-red-300 bg-red-100 text-red-700 px-2.5 py-0.5 text-xs font-medium whitespace-nowrap">
                 <AlertTriangle className="h-3.5 w-3.5" /> {overdueCount} overdue
               </span>
             )}
