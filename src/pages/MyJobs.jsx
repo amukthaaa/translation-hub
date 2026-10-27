@@ -14,7 +14,6 @@ const languageName = (code) => languages.find((l) => l.code === code)?.name || c
 const SORT_OPTIONS = [
   { value: "dueDate", label: "Due date" },
   { value: "priority", label: "Priority" },
-  { value: "wordCount", label: "Word count" },
   { value: "status", label: "Status" },
 ];
 
@@ -30,7 +29,6 @@ const STATUS_ORDER = {
 const COMPARATORS = {
   dueDate: (a, b) => new Date(a.request.dueDate) - new Date(b.request.dueDate),
   priority: (a, b) => (PRIORITY_ORDER[a.request.priority] ?? 99) - (PRIORITY_ORDER[b.request.priority] ?? 99),
-  wordCount: (a, b) => (a.request.wordCount ?? 0) - (b.request.wordCount ?? 0),
   status: (a, b) => (STATUS_ORDER[a.lang.status] ?? 99) - (STATUS_ORDER[b.lang.status] ?? 99),
 };
 
