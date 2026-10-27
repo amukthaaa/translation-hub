@@ -14,28 +14,24 @@ const languageName = (code) => languages.find((l) => l.code === code)?.name || c
 const SORT_OPTIONS = [
   { value: "dueDate", label: "Due date" },
   { value: "priority", label: "Priority" },
-  { value: "status", label: "Status" },
 ];
 
+const STATUS_FILTERS = ["Submitted", "In Translation", "In Review", "Changes Requested", "Published"];
+const PRIORITY_FILTERS = ["High", "Medium", "Low"];
+
 const PRIORITY_ORDER = { High: 0, Medium: 1, Low: 2 };
-const STATUS_ORDER = {
-  "Changes Requested": 0,
-  Submitted: 1,
-  "In Translation": 2,
-  "In Review": 3,
-  Published: 4,
-};
 
 const COMPARATORS = {
   dueDate: (a, b) => new Date(a.request.dueDate) - new Date(b.request.dueDate),
   priority: (a, b) => (PRIORITY_ORDER[a.request.priority] ?? 99) - (PRIORITY_ORDER[b.request.priority] ?? 99),
-  status: (a, b) => (STATUS_ORDER[a.lang.status] ?? 99) - (STATUS_ORDER[b.lang.status] ?? 99),
 };
 
 export default function MyJobs() {
   const { requests } = useRequests();
   const { persona } = useAuth();
   const [sortBy, setSortBy] = useState("dueDate");
+  const [statusFilter, setStatusFilter] = useState("All");
+  const [priorityFilter, setPriorityFilter] = useState("All");
 
   const jobs = useMemo(() => {
     const items = [];
@@ -46,12 +42,17 @@ export default function MyJobs() {
         }
       }
     }
+    const filtered = items.filter(({ request, lang }) => {
+      const statusOk = statusFilter === "All" || lang.status === statusFilter;
+      const priorityOk = priorityFilter === "All" || request.priority === priorityFilter;
+      return statusOk && priorityOk;
+    });
     const compare = COMPARATORS[sortBy];
-    return items.sort((a, b) => {
+    return filtered.sort((a, b) => {
       if (!!a.lang.needsAttention !== !!b.lang.needsAttention) return a.lang.needsAttention ? -1 : 1;
       return compare(a, b);
     });
-  }, [requests, persona, sortBy]);
+  }, [requests, persona, sortBy, statusFilter, priorityFilter]);
 
   return (
     <div>
@@ -74,6 +75,33 @@ export default function MyJobs() {
             ))}
           </Select>
         </div>
+      </div>
+
+      <div className="flex gap-3 mb-4">
+        <Select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="border border-slate-300 rounded-md pl-3 pr-9 py-2 text-sm"
+        >
+          <option value="All">All statuses</option>
+          {STATUS_FILTERS.map((s) => (
+            <option key={s} value={s}>
+              {translatorStatusLabel(s)}
+            </option>
+          ))}
+        </Select>
+        <Select
+          value={priorityFilter}
+          onChange={(e) => setPriorityFilter(e.target.value)}
+          className="border border-slate-300 rounded-md pl-3 pr-9 py-2 text-sm"
+        >
+          <option value="All">All priorities</option>
+          {PRIORITY_FILTERS.map((p) => (
+            <option key={p} value={p}>
+              {p}
+            </option>
+          ))}
+        </Select>
       </div>
 
       <div className="bg-white border border-slate-200 rounded-lg overflow-hidden">
@@ -118,7 +146,7 @@ export default function MyJobs() {
             {jobs.length === 0 && (
               <tr>
                 <td colSpan={6} className="px-4 py-10 text-center text-slate-400">
-                  No jobs assigned yet.
+                  No jobs match these filters.
                 </td>
               </tr>
             )}
