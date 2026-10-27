@@ -1,0 +1,31 @@
+[
+  {
+    "role": "Content Owner",
+    "name": "Dana Whitfield",
+    "initials": "DW",
+    "team": "Marketing",
+    "blurb": "Submits translation requests and tracks their status."
+  },
+  {
+    "role": "Reviewer",
+    "name": "Mariana Ortiz",
+    "initials": "MO",
+    "language": "es",
+    "region": "Latin America",
+    "blurb": "Approves Spanish (LatAm) translations and keeps terms consistent."
+  },
+  {
+    "role": "Translator",
+    "name": "Carlos Medina",
+    "initials": "CM",
+    "language": "es",
+    "blurb": "Translates content into Spanish (LatAm)."
+  },
+  {
+    "role": "Admin",
+    "name": "Amuktha Kotamsetty",
+    "initials": "AK",
+    "team": "Product",
+    "blurb": "Manages users, roles, data quality, and platform metrics."
+  }
+]

@@ -11,18 +11,22 @@
     "screenshot": true,
     "languages": [
       {
+        "translator": "Carlos Medina",
         "code": "es",
         "status": "In Review",
         "reviewer": "Mariana Ortiz",
-        "cost": 5.18
+        "cost": 5.18,
+        "translatedText": "Antes de instalar el compresor scroll, verifique que la línea de succión y los manómetros de presión de descarga estén conectados correctamente. Las lecturas bajas de sobrecalentamiento pueden indicar un problema de carga de refrigerante. Deje que la unidad de condensación se equilibre durante 15 minutos antes del arranque."
       },
       {
+        "translator": "Anne Dubois",
         "code": "fr",
         "status": "In Review",
         "reviewer": "Lucas Bernard",
         "cost": 5.92
       },
       {
+        "translator": "Stefan Brandt",
         "code": "de",
         "status": "In Translation",
         "reviewer": "Katrin Vogel",
@@ -46,12 +50,14 @@
     "screenshot": false,
     "languages": [
       {
+        "translator": "Renata Lima",
         "code": "pt-BR",
         "status": "In Translation",
         "reviewer": "Felipe Souza",
         "cost": 3.64
       },
       {
+        "translator": "Wei Chen",
         "code": "zh-CN",
         "status": "Submitted",
         "reviewer": "Mei Zhang",
@@ -75,18 +81,21 @@
     "screenshot": true,
     "languages": [
       {
+        "translator": "Stefan Brandt",
         "code": "de",
         "status": "Submitted",
         "reviewer": "Katrin Vogel",
         "cost": 4.86
       },
       {
+        "translator": "Yuki Tanaka",
         "code": "ja",
         "status": "Submitted",
         "reviewer": "Haruto Sato",
         "cost": 5.94
       },
       {
+        "translator": "Soo-jin Kim",
         "code": "ko",
         "status": "Submitted",
         "reviewer": "Ji-won Park",
@@ -110,13 +119,16 @@
     "screenshot": true,
     "languages": [
       {
+        "translator": "Carlos Medina",
         "code": "es",
         "status": "Published",
         "reviewer": "Mariana Ortiz",
         "cost": 3.78,
-        "completedAt": "2026-10-17"
+        "completedAt": "2026-10-17",
+        "translatedText": "El compresor scroll de la serie ZP ofrece mayor eficiencia en un amplio rango de temperaturas de la unidad condensadora. Los valores nominales de presión de descarga y subenfriamiento se detallan en la Tabla 3."
       },
       {
+        "translator": "Marco Conti",
         "code": "it",
         "status": "Published",
         "reviewer": "Giulia Romano",
@@ -124,6 +136,7 @@
         "completedAt": "2026-10-19"
       },
       {
+        "translator": "Anne Dubois",
         "code": "fr",
         "status": "Published",
         "reviewer": "Lucas Bernard",
@@ -148,12 +161,14 @@
     "screenshot": false,
     "languages": [
       {
+        "translator": "Wei Chen",
         "code": "zh-CN",
         "status": "In Review",
         "reviewer": "Mei Zhang",
         "cost": 4.4
       },
       {
+        "translator": "Yuki Tanaka",
         "code": "ja",
         "status": "In Translation",
         "reviewer": "Haruto Sato",
@@ -177,18 +192,21 @@
     "screenshot": true,
     "languages": [
       {
+        "translator": "Anne Dubois",
         "code": "fr",
         "status": "In Translation",
         "reviewer": "Lucas Bernard",
         "cost": 3.52
       },
       {
+        "translator": "Stefan Brandt",
         "code": "de",
         "status": "In Translation",
         "reviewer": "Katrin Vogel",
         "cost": 3.96
       },
       {
+        "translator": "Renata Lima",
         "code": "pt-BR",
         "status": "Submitted",
         "reviewer": "Felipe Souza",
@@ -212,12 +230,14 @@
     "screenshot": false,
     "languages": [
       {
+        "translator": "Soo-jin Kim",
         "code": "ko",
         "status": "In Translation",
         "reviewer": "Ji-won Park",
         "cost": 5.32
       },
       {
+        "translator": "Wei Chen",
         "code": "zh-CN",
         "status": "In Translation",
         "reviewer": "Mei Zhang",
@@ -241,12 +261,15 @@
     "screenshot": false,
     "languages": [
       {
+        "translator": "Carlos Medina",
         "code": "es",
-        "status": "Submitted",
+        "status": "In Translation",
         "reviewer": "Mariana Ortiz",
-        "cost": 3.5
+        "cost": 3.5,
+        "translatedText": "Indique el número de modelo del compresor y el número de serie de la unidad condensadora."
       },
       {
+        "translator": "Renata Lima",
         "code": "pt-BR",
         "status": "Submitted",
         "reviewer": "Felipe Souza",
@@ -270,6 +293,7 @@
     "screenshot": true,
     "languages": [
       {
+        "translator": "Stefan Brandt",
         "code": "de",
         "status": "Published",
         "reviewer": "Katrin Vogel",
@@ -277,6 +301,7 @@
         "completedAt": "2026-10-01"
       },
       {
+        "translator": "Marco Conti",
         "code": "it",
         "status": "Published",
         "reviewer": "Giulia Romano",

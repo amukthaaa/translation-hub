@@ -1,8 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
+import { useGlossary } from "../context/GlossaryContext";
+import { useAuth } from "../context/AuthContext";
 import languages from "../data/languages.json";
-import glossaryData from "../data/glossary.json";
 import { findGlossaryMatches } from "../utils/glossary";
+import { deriveOverallStatus } from "../utils/workflow";
 import HighlightedText from "../components/HighlightedText";
 import ScreenshotPlaceholder from "../components/ScreenshotPlaceholder";
 import StatusBadge from "../components/StatusBadge";
@@ -13,14 +15,18 @@ const languageName = (code) => languages.find((l) => l.code === code)?.name || c
 export default function RequestDetail() {
   const { id } = useParams();
   const { requests } = useRequests();
+  const { terms: glossaryData } = useGlossary();
+  const { role } = useAuth();
   const request = requests.find((r) => r.id === id);
+  const backTo = role === "Admin" ? "/all-requests" : "/my-requests";
+  const backLabel = role === "Admin" ? "Back to all requests" : "Back to my requests";
 
   if (!request) {
     return (
       <div className="text-center py-20">
         <p className="text-slate-500">Request {id} was not found.</p>
-        <Link to="/dashboard" className="text-copeland-blue hover:underline text-sm">
-          Back to dashboard
+        <Link to={backTo} className="text-copeland-blue hover:underline text-sm">
+          {backLabel}
         </Link>
       </div>
     );
@@ -33,8 +39,8 @@ export default function RequestDetail() {
 
   return (
     <div>
-      <Link to="/dashboard" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-4">
-        <ArrowLeft className="h-4 w-4" /> Back to dashboard
+      <Link to={backTo} className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-4">
+        <ArrowLeft className="h-4 w-4" /> {backLabel}
       </Link>
 
       <div className="flex items-start justify-between mb-6">
@@ -47,7 +53,7 @@ export default function RequestDetail() {
             Source {request.source} · Order ref {request.orderRef} · Est. cost ${request.estimatedCost?.toFixed(2)}
           </p>
         </div>
-        <StatusBadge status={request.status} />
+        <StatusBadge status={deriveOverallStatus(request.languages)} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -113,13 +119,21 @@ export default function RequestDetail() {
             <h3 className="text-sm font-medium text-slate-700 mb-3">Per-language status</h3>
             <div className="space-y-3">
               {request.languages.map((l) => (
-                <div key={l.code} className="flex items-center justify-between border-b border-slate-100 pb-2 last:border-0 last:pb-0">
-                  <div>
-                    <p className="text-sm font-medium text-slate-700">{languageName(l.code)}</p>
-                    <p className="text-xs text-slate-400">{l.reviewer || "Unassigned"}</p>
-                    <p className="text-xs text-slate-400">${l.cost?.toFixed(2) ?? "0.00"}</p>
+                <div key={l.code} className="border-b border-slate-100 pb-2 last:border-0 last:pb-0">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-slate-700">{languageName(l.code)}</p>
+                      <p className="text-xs text-slate-400">Reviewer: {l.reviewer || "Unassigned"}</p>
+                      <p className="text-xs text-slate-400">Translator: {l.translator || "Unassigned"}</p>
+                      <p className="text-xs text-slate-400">${l.cost?.toFixed(2) ?? "0.00"}</p>
+                    </div>
+                    <StatusBadge status={l.status} />
                   </div>
-                  <StatusBadge status={l.status} />
+                  {l.status === "Changes Requested" && l.reviewerComment && (
+                    <p className="text-xs text-red-600 bg-red-50 border border-red-100 rounded px-2 py-1 mt-2">
+                      {l.reviewerComment}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>

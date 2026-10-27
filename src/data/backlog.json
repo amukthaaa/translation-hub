@@ -19,21 +19,21 @@
   },
   {
     "id": 4,
+    "story": "As a translator, I want source text, context, and approved terms in one workspace so I get it right the first time.",
+    "priority": "P0",
+    "successMetric": "Source text, screenshot, and approved terms are all visible in the job workspace."
+  },
+  {
+    "id": 5,
     "story": "As a platform admin, I want to see volumes, turnaround, and spend in one place so I can spot bottlenecks and manage budget.",
     "priority": "P0",
     "successMetric": "Volume, turnaround, spend, and utilization are visible on one screen."
   },
   {
-    "id": 5,
+    "id": 6,
     "story": "As a platform admin, I want to manage users and roles so the right people have the right access.",
     "priority": "P1",
-    "successMetric": "Roles and reviewer assignments can be changed from the admin page."
-  },
-  {
-    "id": 6,
-    "story": "As a translator, I want a screenshot with the text so my wording fits the context.",
-    "priority": "P1",
-    "successMetric": "Screenshot is visible alongside source text on the request detail view."
+    "successMetric": "Roles and reviewer assignments can be changed from the Users & Roles page."
   },
   {
     "id": 7,

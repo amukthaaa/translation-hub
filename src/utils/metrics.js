@@ -64,3 +64,19 @@ export function requestsByTeam(requests, users) {
 export function activeUserCount(users) {
   return users.filter((u) => u.active).length;
 }
+
+export function overallAvgTurnaroundDays(requests) {
+  const byLang = avgTurnaroundByLanguage(requests);
+  const totalCount = byLang.reduce((s, t) => s + t.count, 0);
+  if (totalCount === 0) return null;
+  const totalDays = byLang.reduce((s, t) => s + t.avgDays * t.count, 0);
+  return Math.round((totalDays / totalCount) * 10) / 10;
+}
+
+export function monthlySpend(requests, monthPrefix) {
+  return (
+    Math.round(
+      requests.filter((r) => r.createdAt.startsWith(monthPrefix)).reduce((s, r) => s + (r.estimatedCost || 0), 0) * 100
+    ) / 100
+  );
+}

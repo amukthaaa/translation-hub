@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
+import { useGlossary } from "../context/GlossaryContext";
+import { useAuth } from "../context/AuthContext";
 import languages from "../data/languages.json";
-import glossary from "../data/glossary.json";
 import sources from "../data/sources.json";
 import costs from "../data/costs.json";
 import { glossaryCoverage } from "../utils/glossary";
@@ -14,6 +15,8 @@ const PRIORITIES = ["Low", "Medium", "High"];
 
 export default function NewRequest() {
   const { addRequest } = useRequests();
+  const { terms: glossary } = useGlossary();
+  const { persona } = useAuth();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -23,7 +26,6 @@ export default function NewRequest() {
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [source, setSource] = useState(sources[0].code);
-  const [owner, setOwner] = useState("");
   const [screenshotAttached, setScreenshotAttached] = useState(false);
   const [submitted, setSubmitted] = useState(null);
 
@@ -33,7 +35,7 @@ export default function NewRequest() {
 
   const coverage = useMemo(
     () => (sourceText.trim() ? glossaryCoverage(sourceText, glossary, selectedLanguages) : []),
-    [sourceText, selectedLanguages]
+    [sourceText, selectedLanguages, glossary]
   );
 
   const rateByCode = useMemo(() => Object.fromEntries(costs.map((c) => [c.code, c.ratePerWord])), []);
@@ -52,7 +54,7 @@ export default function NewRequest() {
     }
   };
 
-  const canSubmit = title.trim() && sourceText.trim() && selectedLanguages.length > 0 && dueDate && owner.trim();
+  const canSubmit = title.trim() && sourceText.trim() && selectedLanguages.length > 0 && dueDate;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,7 +62,7 @@ export default function NewRequest() {
     const id = addRequest({
       title: title.trim(),
       sourceText: sourceText.trim(),
-      owner: owner.trim(),
+      owner: persona.name,
       priority,
       dueDate,
       source,
@@ -86,10 +88,10 @@ export default function NewRequest() {
             View request
           </button>
           <button
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/my-requests")}
             className="border border-slate-300 px-4 py-2 rounded-md text-sm font-medium text-slate-600 hover:bg-slate-50"
           >
-            Back to dashboard
+            Back to my requests
           </button>
         </div>
       </div>
@@ -206,17 +208,7 @@ export default function NewRequest() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Owner</label>
-              <input
-                type="text"
-                value={owner}
-                onChange={(e) => setOwner(e.target.value)}
-                placeholder="Your name"
-                className="w-full border border-slate-300 rounded-md px-3 py-2 text-sm"
-              />
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">Deadline</label>
               <input

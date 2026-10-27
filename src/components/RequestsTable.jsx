@@ -1,45 +1,55 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useRequests } from "../context/RequestsContext";
-import StatusBadge from "../components/StatusBadge";
-import OnboardingNote from "../components/OnboardingNote";
-import Select from "../components/Select";
+import StatusBadge from "./StatusBadge";
+import OnboardingNote from "./OnboardingNote";
+import Select from "./Select";
 import languages from "../data/languages.json";
 import sources from "../data/sources.json";
+import { deriveOverallStatus } from "../utils/workflow";
 import { AlertTriangle } from "lucide-react";
 
 const STATUSES = ["Submitted", "In Translation", "In Review", "Published"];
 const TODAY = new Date();
 
-function isOverdue(request) {
-  if (request.status === "Published") return false;
+function isOverdue(request, overallStatus) {
+  if (overallStatus === "Published") return false;
   return new Date(request.dueDate) < TODAY;
 }
 
 const currency = (n) => `$${n.toFixed(2)}`;
 
-export default function Dashboard() {
-  const { requests } = useRequests();
+export default function RequestsTable({
+  requests,
+  title,
+  showOwnerColumn = true,
+  showNewRequestButton = false,
+  showOnboardingNote = false,
+}) {
   const [statusFilter, setStatusFilter] = useState("All");
   const [languageFilter, setLanguageFilter] = useState("All");
   const [sourceFilter, setSourceFilter] = useState("All");
 
+  const withStatus = useMemo(
+    () => requests.map((r) => ({ ...r, overallStatus: deriveOverallStatus(r.languages) })),
+    [requests]
+  );
+
   const filtered = useMemo(() => {
-    return requests.filter((r) => {
-      const statusOk = statusFilter === "All" || r.status === statusFilter;
+    return withStatus.filter((r) => {
+      const statusOk = statusFilter === "All" || r.overallStatus === statusFilter;
       const langOk = languageFilter === "All" || r.languages.some((l) => l.code === languageFilter);
       const sourceOk = sourceFilter === "All" || r.source === sourceFilter;
       return statusOk && langOk && sourceOk;
     });
-  }, [requests, statusFilter, languageFilter, sourceFilter]);
+  }, [withStatus, statusFilter, languageFilter, sourceFilter]);
 
-  const overdueCount = requests.filter(isOverdue).length;
+  const overdueCount = withStatus.filter((r) => isOverdue(r, r.overallStatus)).length;
 
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-medium text-slate-900">Status Dashboard</h2>
+          <h2 className="text-2xl font-medium text-slate-900">{title}</h2>
           <p className="text-sm text-slate-500 mt-1 flex items-center gap-2">
             <span>{requests.length} total requests</span>
             {overdueCount > 0 && (
@@ -49,15 +59,17 @@ export default function Dashboard() {
             )}
           </p>
         </div>
-        <Link
-          to="/new-request"
-          className="bg-copeland-blue text-white px-4 py-2 text-sm font-medium hover:bg-copeland-navy transition-colors"
-        >
-          + New Request
-        </Link>
+        {showNewRequestButton && (
+          <Link
+            to="/new-request"
+            className="bg-copeland-blue text-white px-4 py-2 text-sm font-medium hover:bg-copeland-navy transition-colors"
+          >
+            + New Request
+          </Link>
+        )}
       </div>
 
-      <OnboardingNote />
+      {showOnboardingNote && <OnboardingNote />}
 
       <div className="flex gap-3 mb-4">
         <Select
@@ -105,7 +117,7 @@ export default function Dashboard() {
               <th className="px-4 py-3 font-medium">Title</th>
               <th className="px-4 py-3 font-medium">Source</th>
               <th className="px-4 py-3 font-medium">Languages</th>
-              <th className="px-4 py-3 font-medium">Owner</th>
+              {showOwnerColumn && <th className="px-4 py-3 font-medium">Owner</th>}
               <th className="px-4 py-3 font-medium">Due Date</th>
               <th className="px-4 py-3 font-medium">Est. Cost</th>
               <th className="px-4 py-3 font-medium">Status</th>
@@ -113,12 +125,9 @@ export default function Dashboard() {
           </thead>
           <tbody>
             {filtered.map((r) => {
-              const overdue = isOverdue(r);
+              const overdue = isOverdue(r, r.overallStatus);
               return (
-                <tr
-                  key={r.id}
-                  className="border-b border-slate-100 last:border-0 hover:bg-slate-50 cursor-pointer"
-                >
+                <tr key={r.id} className="border-b border-slate-100 last:border-0 hover:bg-slate-50 cursor-pointer">
                   <td className="px-4 py-3">
                     <Link to={`/request/${r.id}`} className="font-medium text-copeland-blue hover:underline">
                       {r.title}
@@ -126,24 +135,22 @@ export default function Dashboard() {
                     <div className="text-xs text-slate-400">{r.id}</div>
                   </td>
                   <td className="px-4 py-3 text-slate-600">{r.source}</td>
-                  <td className="px-4 py-3 text-slate-600">
-                    {r.languages.map((l) => l.code).join(", ")}
-                  </td>
-                  <td className="px-4 py-3 text-slate-600">{r.owner}</td>
+                  <td className="px-4 py-3 text-slate-600">{r.languages.map((l) => l.code).join(", ")}</td>
+                  {showOwnerColumn && <td className="px-4 py-3 text-slate-600">{r.owner}</td>}
                   <td className={`px-4 py-3 ${overdue ? "text-red-600 font-semibold" : "text-slate-600"}`}>
                     {r.dueDate}
                     {overdue && " (overdue)"}
                   </td>
                   <td className="px-4 py-3 text-slate-600">{currency(r.estimatedCost ?? 0)}</td>
                   <td className="px-4 py-3">
-                    <StatusBadge status={r.status} />
+                    <StatusBadge status={r.overallStatus} />
                   </td>
                 </tr>
               );
             })}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-4 py-10 text-center text-slate-400">
+                <td colSpan={showOwnerColumn ? 7 : 6} className="px-4 py-10 text-center text-slate-400">
                   No requests match these filters.
                 </td>
               </tr>

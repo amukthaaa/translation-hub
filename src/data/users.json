@@ -1,8 +1,8 @@
 [
-  { "id": "u-1", "name": "Dana Whitfield", "email": "dana.whitfield@copeland.com", "role": "Requester", "team": "Marketing", "active": true },
-  { "id": "u-2", "name": "Priya Nandakumar", "email": "priya.nandakumar@copeland.com", "role": "Requester", "team": "Product", "active": true },
-  { "id": "u-3", "name": "Marcus Lee", "email": "marcus.lee@copeland.com", "role": "Requester", "team": "Technical Docs", "active": true },
-  { "id": "u-4", "name": "Jordan Reyes", "email": "jordan.reyes@copeland.com", "role": "Requester", "team": "Commerce", "active": true },
+  { "id": "u-1", "name": "Dana Whitfield", "email": "dana.whitfield@copeland.com", "role": "Content Owner", "team": "Marketing", "active": true },
+  { "id": "u-2", "name": "Priya Nandakumar", "email": "priya.nandakumar@copeland.com", "role": "Content Owner", "team": "Product", "active": true },
+  { "id": "u-3", "name": "Marcus Lee", "email": "marcus.lee@copeland.com", "role": "Content Owner", "team": "Technical Docs", "active": true },
+  { "id": "u-4", "name": "Jordan Reyes", "email": "jordan.reyes@copeland.com", "role": "Content Owner", "team": "Commerce", "active": true },
   { "id": "u-5", "name": "Amuktha Kotamsetty", "email": "kotamsetty.a@northeastern.edu", "role": "Admin", "team": "Product", "active": true },
   { "id": "u-6", "name": "Mariana Ortiz", "email": "mariana.ortiz@copeland.com", "role": "Reviewer", "language": "es", "region": "Latin America", "active": true },
   { "id": "u-7", "name": "Lucas Bernard", "email": "lucas.bernard@copeland.com", "role": "Reviewer", "language": "fr", "region": "EMEA", "active": true },

@@ -28,7 +28,7 @@ export default function OnboardingNote() {
           </p>
           <p>
             <span className="font-medium">Who approves what:</span> each target language has a regional reviewer
-            assigned (see the Admin page) who approves the translation before it moves to Published.
+            assigned by your Admin who approves the translation before it moves to Published.
           </p>
         </div>
       )}

@@ -1,10 +1,17 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import initialRequests from "../data/requests.json";
 import costs from "../data/costs.json";
+import users from "../data/users.json";
 
 const RequestsContext = createContext(null);
 
 const rateByCode = Object.fromEntries(costs.map((c) => [c.code, c.ratePerWord]));
+const reviewerByCode = Object.fromEntries(
+  users.filter((u) => u.role === "Reviewer").map((u) => [u.language, u.name])
+);
+const translatorByCode = Object.fromEntries(
+  users.filter((u) => u.role === "Translator").map((u) => [u.language, u.name])
+);
 
 let nextIdCounter = 1051;
 let nextOrderRefCounter = 48260;
@@ -17,6 +24,10 @@ function round2(n) {
   return Math.round(n * 100) / 100;
 }
 
+function today() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 export function RequestsProvider({ children }) {
   const [requests, setRequests] = useState(initialRequests);
 
@@ -25,14 +36,20 @@ export function RequestsProvider({ children }) {
     const words = wordCount(draft.sourceText);
     const languages = draft.languageCodes.map((code) => {
       const rate = rateByCode[code] ?? 0.15;
-      return { code, status: "Submitted", reviewer: null, cost: round2(words * rate) };
+      return {
+        code,
+        status: "Submitted",
+        reviewer: reviewerByCode[code] ?? null,
+        translator: translatorByCode[code] ?? null,
+        cost: round2(words * rate),
+      };
     });
     const estimatedCost = round2(languages.reduce((sum, l) => sum + l.cost, 0));
 
     const newRequest = {
       id,
       status: "Submitted",
-      createdAt: new Date().toISOString().slice(0, 10),
+      createdAt: today(),
       wordCount: words,
       estimatedCost,
       orderRef: `PO-${nextOrderRefCounter++}`,
@@ -44,7 +61,50 @@ export function RequestsProvider({ children }) {
     return id;
   };
 
-  const value = useMemo(() => ({ requests, addRequest }), [requests]);
+  const updateLanguage = (requestId, code, patch) => {
+    setRequests((prev) =>
+      prev.map((r) =>
+        r.id !== requestId
+          ? r
+          : { ...r, languages: r.languages.map((l) => (l.code !== code ? l : { ...l, ...patch })) }
+      )
+    );
+  };
+
+  const saveDraft = (requestId, code, text) => {
+    updateLanguage(requestId, code, {
+      translatedText: text,
+      status: "In Translation",
+    });
+  };
+
+  const submitForReview = (requestId, code, text) => {
+    updateLanguage(requestId, code, {
+      translatedText: text,
+      status: "In Review",
+      reviewerComment: null,
+    });
+  };
+
+  const approveLanguage = (requestId, code) => {
+    updateLanguage(requestId, code, {
+      status: "Published",
+      completedAt: today(),
+      reviewerComment: null,
+    });
+  };
+
+  const requestChanges = (requestId, code, comment) => {
+    updateLanguage(requestId, code, {
+      status: "Changes Requested",
+      reviewerComment: comment,
+    });
+  };
+
+  const value = useMemo(
+    () => ({ requests, addRequest, saveDraft, submitForReview, approveLanguage, requestChanges }),
+    [requests]
+  );
 
   return <RequestsContext.Provider value={value}>{children}</RequestsContext.Provider>;
 }

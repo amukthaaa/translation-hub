@@ -1,15 +1,18 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Navigate, Outlet, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { ROLE_NAV, ROLE_HOME, isPathAllowed } from "../config/roles";
+import RoleSwitcher from "./RoleSwitcher";
 import copelandLogo from "../assets/copeland-logo.png";
 
-const navItems = [
-  { to: "/dashboard", label: "Dashboard" },
-  { to: "/new-request", label: "New Request" },
-  { to: "/metrics", label: "Metrics" },
-  { to: "/admin", label: "Admin" },
-  { to: "/backlog", label: "Backlog" },
-];
-
 export default function Layout() {
+  const { role } = useAuth();
+  const location = useLocation();
+
+  if (!role) return <Navigate to="/login" replace />;
+  if (!isPathAllowed(role, location.pathname)) return <Navigate to={ROLE_HOME[role]} replace />;
+
+  const navItems = ROLE_NAV[role] || [];
+
   return (
     <div className="min-h-screen flex flex-col">
       <header
@@ -29,7 +32,6 @@ export default function Layout() {
               <NavLink
                 key={item.to}
                 to={item.to}
-                end={item.end}
                 className={({ isActive }) =>
                   `px-4 py-2 text-sm font-medium transition-colors ${
                     isActive ? "bg-white text-copeland-navy" : "text-blue-100 hover:bg-white/10"
@@ -40,6 +42,7 @@ export default function Layout() {
               </NavLink>
             ))}
           </nav>
+          <RoleSwitcher />
         </div>
       </header>
       <main className="flex-1 bg-slate-50">

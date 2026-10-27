@@ -1,5 +1,5 @@
 [
-  { "name": "Requester", "description": "Submits translation requests and tracks their status." },
+  { "name": "Content Owner", "description": "Submits translation requests and tracks their status." },
   { "name": "Reviewer", "description": "Approves translations for their assigned language or region before publishing." },
   { "name": "Translator", "description": "Produces the translated content for assigned languages." },
   { "name": "Admin", "description": "Manages users, roles, data quality, and platform metrics." }

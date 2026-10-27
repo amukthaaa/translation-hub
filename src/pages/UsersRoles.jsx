@@ -6,7 +6,7 @@ import Select from "../components/Select";
 const ROLE_NAMES = roles.map((r) => r.name);
 const languageName = (code) => languages.find((l) => l.code === code)?.name || code;
 
-export default function Admin() {
+export default function UsersRoles() {
   const { users, updateUserRole, updateReviewerAssignment, toggleActive } = useUsers();
   const reviewers = users.filter((u) => u.role === "Reviewer");
 
@@ -25,7 +25,7 @@ export default function Admin() {
 
   return (
     <div>
-      <h2 className="text-2xl font-medium text-slate-900 mb-1">Admin</h2>
+      <h2 className="text-2xl font-medium text-slate-900 mb-1">Users & Roles</h2>
       <p className="text-sm text-slate-500 mb-6">Manage users, roles, and reviewer assignments.</p>
 
       <div className="bg-white border border-slate-200 rounded-lg overflow-hidden mb-8">
@@ -35,8 +35,8 @@ export default function Admin() {
               <th className="px-4 py-3 font-medium">Name</th>
               <th className="px-4 py-3 font-medium">Email</th>
               <th className="px-4 py-3 font-medium">Role</th>
-              <th className="px-4 py-3 font-medium">Context</th>
-              <th className="px-4 py-3 font-medium">Active</th>
+              <th className="px-4 py-3 font-medium">Team / Assigned language</th>
+              <th className="px-4 py-3 font-medium">Status</th>
             </tr>
           </thead>
           <tbody>
