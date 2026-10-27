@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
 import { useGlossary } from "../context/GlossaryContext";
 import { useAuth } from "../context/AuthContext";
 import HighlightedText from "../components/HighlightedText";
+import DiffHighlightedText from "../components/DiffHighlightedText";
 import ScreenshotPlaceholder from "../components/ScreenshotPlaceholder";
 import StatusBadge from "../components/StatusBadge";
 import CommentThread from "../components/CommentThread";
 import { findGlossaryMatches } from "../utils/glossary";
 import { translatorStatusLabel } from "../utils/workflow";
 import languages from "../data/languages.json";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
 
 const languageName = (code) => languages.find((l) => l.code === code)?.name || code;
 
@@ -25,10 +26,14 @@ export default function JobWorkspace() {
   const langEntry = request?.languages.find((l) => l.code === lang);
   const [text, setText] = useState(langEntry?.translatedText || "");
   const [reply, setReply] = useState("");
+  const [justSaved, setJustSaved] = useState(false);
+  const savedTimeoutRef = useRef(null);
 
   useEffect(() => {
     setText(langEntry?.translatedText || "");
   }, [langEntry?.translatedText]);
+
+  useEffect(() => () => clearTimeout(savedTimeoutRef.current), []);
 
   useEffect(() => {
     if (request && langEntry?.needsAttention) {
@@ -62,6 +67,9 @@ export default function JobWorkspace() {
 
   const handleSaveDraft = () => {
     saveDraft(request.id, lang, text);
+    setJustSaved(true);
+    clearTimeout(savedTimeoutRef.current);
+    savedTimeoutRef.current = setTimeout(() => setJustSaved(false), 2000);
   };
 
   const handleSubmit = () => {
@@ -95,7 +103,16 @@ export default function JobWorkspace() {
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white border border-slate-200 rounded-lg p-5">
             <h3 className="text-sm font-medium text-slate-700 mb-3">Source text (English)</h3>
-            <HighlightedText text={request.sourceText} glossary={glossary} targetLanguageCodes={[lang]} />
+            {langEntry.previousSourceText ? (
+              <>
+                <DiffHighlightedText oldText={langEntry.previousSourceText} newText={request.sourceText} />
+                <p className="text-xs text-amber-600 mt-2">
+                  Highlighted text shows what the content owner changed since your last draft.
+                </p>
+              </>
+            ) : (
+              <HighlightedText text={request.sourceText} glossary={glossary} targetLanguageCodes={[lang]} />
+            )}
             {distinctTerms.length > 0 && (
               <div className="mt-4 pt-4 border-t border-slate-100 grid grid-cols-2 sm:grid-cols-3 gap-1.5">
                 {distinctTerms.map((m) => (
@@ -112,7 +129,10 @@ export default function JobWorkspace() {
             <h3 className="text-sm font-medium text-slate-700 mb-3">Your translation</h3>
             <textarea
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => {
+                setText(e.target.value);
+                setJustSaved(false);
+              }}
               rows={8}
               placeholder={`Translate into ${languageName(lang)}...`}
               className="w-full border border-slate-300 rounded-md px-3 py-2 text-sm"
@@ -120,9 +140,19 @@ export default function JobWorkspace() {
             <div className="flex justify-end gap-3 mt-3">
               <button
                 onClick={handleSaveDraft}
-                className="border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50"
+                className={`inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors ${
+                  justSaved
+                    ? "bg-emerald-600 text-white"
+                    : "border border-slate-300 text-slate-600 hover:bg-slate-50"
+                }`}
               >
-                Save draft
+                {justSaved ? (
+                  <>
+                    <Check className="h-4 w-4" /> Saved
+                  </>
+                ) : (
+                  "Save draft"
+                )}
               </button>
               <button
                 onClick={handleSubmit}

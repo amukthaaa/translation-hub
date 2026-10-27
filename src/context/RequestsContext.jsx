@@ -90,6 +90,7 @@ export function RequestsProvider({ children }) {
     updateLanguage(requestId, code, {
       translatedText: text,
       status: "In Translation",
+      previousSourceText: null,
     });
   };
 
@@ -97,6 +98,7 @@ export function RequestsProvider({ children }) {
     updateLanguage(requestId, code, {
       translatedText: text,
       status: "In Review",
+      previousSourceText: null,
     });
   };
 
@@ -136,6 +138,7 @@ export function RequestsProvider({ children }) {
             ...l,
             cost,
             needsAttention: true,
+            previousSourceText: sourceTextChanged ? r.sourceText : l.previousSourceText,
             ...appendComment(l, {
               role: "Admin",
               author: "Admin",
