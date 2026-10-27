@@ -15,6 +15,7 @@ const translatorByCode = Object.fromEntries(
 
 let nextIdCounter = 1051;
 let nextOrderRefCounter = 48260;
+let nextCommentId = 1;
 
 function wordCount(text) {
   return text.trim().split(/\s+/).filter(Boolean).length;
@@ -61,15 +62,29 @@ export function RequestsProvider({ children }) {
     return id;
   };
 
-  const updateLanguage = (requestId, code, patch) => {
+  const updateLanguage = (requestId, code, patchOrFn) => {
     setRequests((prev) =>
       prev.map((r) =>
         r.id !== requestId
           ? r
-          : { ...r, languages: r.languages.map((l) => (l.code !== code ? l : { ...l, ...patch })) }
+          : {
+              ...r,
+              languages: r.languages.map((l) => {
+                if (l.code !== code) return l;
+                const patch = typeof patchOrFn === "function" ? patchOrFn(l) : patchOrFn;
+                return { ...l, ...patch };
+              }),
+            }
       )
     );
   };
+
+  const appendComment = (l, { role, author, text }) => ({
+    comments: [
+      ...(l.comments || []),
+      { id: `c-${nextCommentId++}`, role, author, text, createdAt: today() },
+    ],
+  });
 
   const saveDraft = (requestId, code, text) => {
     updateLanguage(requestId, code, {
@@ -82,7 +97,6 @@ export function RequestsProvider({ children }) {
     updateLanguage(requestId, code, {
       translatedText: text,
       status: "In Review",
-      reviewerComment: null,
     });
   };
 
@@ -90,19 +104,30 @@ export function RequestsProvider({ children }) {
     updateLanguage(requestId, code, {
       status: "Published",
       completedAt: today(),
-      reviewerComment: null,
     });
   };
 
-  const requestChanges = (requestId, code, comment) => {
-    updateLanguage(requestId, code, {
+  const requestChanges = (requestId, code, comment, author) => {
+    updateLanguage(requestId, code, (l) => ({
       status: "Changes Requested",
-      reviewerComment: comment,
-    });
+      ...appendComment(l, { role: "Reviewer", author, text: comment }),
+    }));
+  };
+
+  const replyToComment = (requestId, code, text, author) => {
+    updateLanguage(requestId, code, (l) => appendComment(l, { role: "Translator", author, text }));
   };
 
   const value = useMemo(
-    () => ({ requests, addRequest, saveDraft, submitForReview, approveLanguage, requestChanges }),
+    () => ({
+      requests,
+      addRequest,
+      saveDraft,
+      submitForReview,
+      approveLanguage,
+      requestChanges,
+      replyToComment,
+    }),
     [requests]
   );
 

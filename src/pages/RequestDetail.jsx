@@ -8,6 +8,7 @@ import { deriveOverallStatus } from "../utils/workflow";
 import HighlightedText from "../components/HighlightedText";
 import ScreenshotPlaceholder from "../components/ScreenshotPlaceholder";
 import StatusBadge from "../components/StatusBadge";
+import CommentThread from "../components/CommentThread";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
 
 const languageName = (code) => languages.find((l) => l.code === code)?.name || code;
@@ -129,10 +130,10 @@ export default function RequestDetail() {
                     </div>
                     <StatusBadge status={l.status} />
                   </div>
-                  {l.status === "Changes Requested" && l.reviewerComment && (
-                    <p className="text-xs text-red-600 bg-red-50 border border-red-100 rounded px-2 py-1 mt-2">
-                      {l.reviewerComment}
-                    </p>
+                  {l.comments?.length > 0 && (
+                    <div className="mt-2">
+                      <CommentThread comments={l.comments} />
+                    </div>
                   )}
                 </div>
               ))}

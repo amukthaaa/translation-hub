@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
 import { useGlossary } from "../context/GlossaryContext";
+import { useAuth } from "../context/AuthContext";
 import HighlightedText from "../components/HighlightedText";
 import ScreenshotPlaceholder from "../components/ScreenshotPlaceholder";
 import StatusBadge from "../components/StatusBadge";
+import CommentThread from "../components/CommentThread";
 import { findGlossaryMatches } from "../utils/glossary";
 import { translatorStatusLabel } from "../utils/workflow";
 import languages from "../data/languages.json";
@@ -14,13 +16,15 @@ const languageName = (code) => languages.find((l) => l.code === code)?.name || c
 
 export default function JobWorkspace() {
   const { id, lang } = useParams();
-  const { requests, saveDraft, submitForReview } = useRequests();
+  const { requests, saveDraft, submitForReview, replyToComment } = useRequests();
   const { terms: glossary } = useGlossary();
+  const { persona } = useAuth();
   const navigate = useNavigate();
 
   const request = requests.find((r) => r.id === id);
   const langEntry = request?.languages.find((l) => l.code === lang);
   const [text, setText] = useState(langEntry?.translatedText || "");
+  const [reply, setReply] = useState("");
 
   useEffect(() => {
     setText(langEntry?.translatedText || "");
@@ -51,6 +55,12 @@ export default function JobWorkspace() {
     navigate("/my-jobs");
   };
 
+  const handleReply = () => {
+    if (!reply.trim()) return;
+    replyToComment(request.id, lang, reply.trim(), persona.name);
+    setReply("");
+  };
+
   return (
     <div>
       <Link to="/my-jobs" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-4">
@@ -67,10 +77,27 @@ export default function JobWorkspace() {
         <StatusBadge status={translatorStatusLabel(langEntry.status)} />
       </div>
 
-      {langEntry.status === "Changes Requested" && langEntry.reviewerComment && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-md px-4 py-3 mb-6">
-          <p className="font-medium mb-0.5">Reviewer requested changes</p>
-          <p>{langEntry.reviewerComment}</p>
+      {langEntry.comments?.length > 0 && (
+        <div className="bg-white border border-slate-200 rounded-lg p-5 mb-6">
+          <h3 className="text-sm font-medium text-slate-700 mb-3">Reviewer feedback</h3>
+          <CommentThread comments={langEntry.comments} />
+          <div className="mt-3 flex gap-2">
+            <input
+              type="text"
+              value={reply}
+              onChange={(e) => setReply(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleReply()}
+              placeholder="Reply to the reviewer..."
+              className="flex-1 border border-slate-300 rounded-md px-3 py-2 text-sm"
+            />
+            <button
+              onClick={handleReply}
+              disabled={!reply.trim()}
+              className="bg-copeland-blue text-white px-4 py-2 text-sm font-medium hover:bg-copeland-navy disabled:bg-slate-300"
+            >
+              Reply
+            </button>
+          </div>
         </div>
       )}
 

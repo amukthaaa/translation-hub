@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
 import { useGlossary } from "../context/GlossaryContext";
+import { useAuth } from "../context/AuthContext";
 import HighlightedText from "../components/HighlightedText";
 import ScreenshotPlaceholder from "../components/ScreenshotPlaceholder";
 import StatusBadge from "../components/StatusBadge";
+import CommentThread from "../components/CommentThread";
 import { findTranslationMismatches } from "../utils/workflow";
 import languages from "../data/languages.json";
 import { ArrowLeft, AlertTriangle, CheckCircle2 } from "lucide-react";
@@ -15,6 +17,7 @@ export default function ReviewScreen() {
   const { id, lang } = useParams();
   const { requests, approveLanguage, requestChanges } = useRequests();
   const { terms: glossary } = useGlossary();
+  const { persona } = useAuth();
   const navigate = useNavigate();
   const [comment, setComment] = useState("");
   const [showCommentBox, setShowCommentBox] = useState(false);
@@ -42,7 +45,7 @@ export default function ReviewScreen() {
 
   const handleRequestChanges = () => {
     if (!comment.trim()) return;
-    requestChanges(request.id, lang, comment.trim());
+    requestChanges(request.id, lang, comment.trim(), persona.name);
     navigate("/review-queue");
   };
 
@@ -78,6 +81,13 @@ export default function ReviewScreen() {
               )}
             </div>
           </div>
+
+          {langEntry.comments?.length > 0 && (
+            <div className="bg-white border border-slate-200 rounded-lg p-5">
+              <h3 className="text-sm font-medium text-slate-700 mb-3">Conversation</h3>
+              <CommentThread comments={langEntry.comments} />
+            </div>
+          )}
 
           <div className="bg-white border border-slate-200 rounded-lg p-5">
             <h3 className="text-sm font-medium text-slate-700 mb-3">Glossary term check</h3>
