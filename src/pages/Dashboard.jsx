@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
 import StatusBadge from "../components/StatusBadge";
 import OnboardingNote from "../components/OnboardingNote";
+import Select from "../components/Select";
 import languages from "../data/languages.json";
 import sources from "../data/sources.json";
 import { AlertTriangle } from "lucide-react";
@@ -59,10 +60,10 @@ export default function Dashboard() {
       <OnboardingNote />
 
       <div className="flex gap-3 mb-4">
-        <select
+        <Select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="border border-slate-300 rounded-md px-3 py-2 text-sm bg-white"
+          className="border border-slate-300 rounded-md pl-3 pr-9 py-2 text-sm"
         >
           <option value="All">All statuses</option>
           {STATUSES.map((s) => (
@@ -70,11 +71,11 @@ export default function Dashboard() {
               {s}
             </option>
           ))}
-        </select>
-        <select
+        </Select>
+        <Select
           value={languageFilter}
           onChange={(e) => setLanguageFilter(e.target.value)}
-          className="border border-slate-300 rounded-md px-3 py-2 text-sm bg-white"
+          className="border border-slate-300 rounded-md pl-3 pr-9 py-2 text-sm"
         >
           <option value="All">All languages</option>
           {languages.map((l) => (
@@ -82,11 +83,11 @@ export default function Dashboard() {
               {l.name}
             </option>
           ))}
-        </select>
-        <select
+        </Select>
+        <Select
           value={sourceFilter}
           onChange={(e) => setSourceFilter(e.target.value)}
-          className="border border-slate-300 rounded-md px-3 py-2 text-sm bg-white"
+          className="border border-slate-300 rounded-md pl-3 pr-9 py-2 text-sm"
         >
           <option value="All">All sources</option>
           {sources.map((s) => (
@@ -94,7 +95,7 @@ export default function Dashboard() {
               {s.name}
             </option>
           ))}
-        </select>
+        </Select>
       </div>
 
       <div className="bg-white rounded-lg border border-slate-200 overflow-x-auto">
@@ -116,9 +117,7 @@ export default function Dashboard() {
               return (
                 <tr
                   key={r.id}
-                  className={`border-b border-slate-100 last:border-0 hover:bg-slate-50 cursor-pointer ${
-                    overdue ? "bg-red-50" : ""
-                  }`}
+                  className="border-b border-slate-100 last:border-0 hover:bg-slate-50 cursor-pointer"
                 >
                   <td className="px-4 py-3">
                     <Link to={`/request/${r.id}`} className="font-medium text-copeland-blue hover:underline">

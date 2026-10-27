@@ -1,6 +1,7 @@
 import { useUsers } from "../context/UsersContext";
 import roles from "../data/roles.json";
 import languages from "../data/languages.json";
+import Select from "../components/Select";
 
 const ROLE_NAMES = roles.map((r) => r.name);
 const languageName = (code) => languages.find((l) => l.code === code)?.name || code;
@@ -44,17 +45,18 @@ export default function Admin() {
                 <td className="px-4 py-3 font-medium text-slate-800">{u.name}</td>
                 <td className="px-4 py-3 text-slate-500">{u.email}</td>
                 <td className="px-4 py-3">
-                  <select
+                  <Select
                     value={u.role}
                     onChange={(e) => updateUserRole(u.id, e.target.value)}
-                    className="border border-slate-300 rounded-md px-2 py-1 text-sm bg-white"
+                    className="border border-slate-300 rounded-md pl-2 pr-7 py-1 text-sm"
+                    chevronClassName="right-2"
                   >
                     {ROLE_NAMES.map((r) => (
                       <option key={r} value={r}>
                         {r}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </td>
                 <td className="px-4 py-3 text-slate-500">
                   {u.team && <span>{u.team}</span>}
@@ -93,10 +95,12 @@ export default function Admin() {
               return (
                 <div key={l.code} className="flex items-center justify-between gap-3 text-sm">
                   <span className="text-slate-600 w-40 shrink-0">{l.name}</span>
-                  <select
+                  <Select
                     value={assigned?.id ?? ""}
                     onChange={(e) => reassignReviewer(l.code, e.target.value || null)}
-                    className="flex-1 border border-slate-300 rounded-md px-2 py-1.5 text-sm bg-white"
+                    wrapperClassName="flex-1"
+                    className="w-full border border-slate-300 rounded-md pl-2 pr-7 py-1.5 text-sm"
+                    chevronClassName="right-2"
                   >
                     <option value="">Unassigned</option>
                     {reviewers.map((r) => (
@@ -104,7 +108,7 @@ export default function Admin() {
                         {r.name} {r.region ? `(${r.region})` : ""}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </div>
               );
             })}

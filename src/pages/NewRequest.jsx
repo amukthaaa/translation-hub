@@ -7,6 +7,7 @@ import sources from "../data/sources.json";
 import costs from "../data/costs.json";
 import { glossaryCoverage } from "../utils/glossary";
 import HighlightedText from "../components/HighlightedText";
+import Select from "../components/Select";
 import { UploadCloud, ImagePlus, AlertTriangle, CheckCircle2 } from "lucide-react";
 
 const PRIORITIES = ["Low", "Medium", "High"];
@@ -190,17 +191,18 @@ export default function NewRequest() {
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">Content source</label>
-              <select
+              <Select
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
-                className="w-full border border-slate-300 rounded-md px-3 py-2 text-sm bg-white"
+                wrapperClassName="w-full"
+                className="w-full border border-slate-300 rounded-md pl-3 pr-9 py-2 text-sm"
               >
                 {sources.map((s) => (
                   <option key={s.code} value={s.code}>
                     {s.name}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
           </div>
 
@@ -226,17 +228,18 @@ export default function NewRequest() {
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">Priority</label>
-              <select
+              <Select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value)}
-                className="w-full border border-slate-300 rounded-md px-3 py-2 text-sm bg-white"
+                wrapperClassName="w-full"
+                className="w-full border border-slate-300 rounded-md pl-3 pr-9 py-2 text-sm"
               >
                 {PRIORITIES.map((p) => (
                   <option key={p} value={p}>
                     {p}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
           </div>
 
