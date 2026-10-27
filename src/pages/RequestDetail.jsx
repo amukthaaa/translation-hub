@@ -39,7 +39,7 @@ export default function RequestDetail() {
 
       <div className="flex items-start justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-semibold text-slate-900">{request.title}</h2>
+          <h2 className="text-2xl font-medium text-slate-900">{request.title}</h2>
           <p className="text-sm text-slate-400 mt-1">
             {request.id} · Owner {request.owner} · Due {request.dueDate} · Priority {request.priority}
           </p>
@@ -53,13 +53,13 @@ export default function RequestDetail() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white border border-slate-200 rounded-lg p-5">
-            <h3 className="text-sm font-semibold text-slate-700 mb-3">Source text</h3>
+            <h3 className="text-sm font-medium text-slate-700 mb-3">Source text</h3>
             <HighlightedText text={request.sourceText} glossary={glossaryData} targetLanguageCodes={targetCodes} />
           </div>
 
           {distinctTerms.length > 0 && (
             <div className="bg-white border border-slate-200 rounded-lg p-5">
-              <h3 className="text-sm font-semibold text-slate-700 mb-3">Glossary terms detected</h3>
+              <h3 className="text-sm font-medium text-slate-700 mb-3">Glossary terms detected</h3>
               <div className="space-y-3">
                 {distinctTerms.map((m) => (
                   <div key={m.term} className="border border-slate-100 rounded-md p-3">
@@ -104,13 +104,13 @@ export default function RequestDetail() {
         <div className="space-y-6">
           {request.screenshot && (
             <div>
-              <h3 className="text-sm font-semibold text-slate-700 mb-2">Context screenshot</h3>
+              <h3 className="text-sm font-medium text-slate-700 mb-2">Context screenshot</h3>
               <ScreenshotPlaceholder title={request.title} />
             </div>
           )}
 
           <div className="bg-white border border-slate-200 rounded-lg p-5">
-            <h3 className="text-sm font-semibold text-slate-700 mb-3">Per-language status</h3>
+            <h3 className="text-sm font-medium text-slate-700 mb-3">Per-language status</h3>
             <div className="space-y-3">
               {request.languages.map((l) => (
                 <div key={l.code} className="flex items-center justify-between border-b border-slate-100 pb-2 last:border-0 last:pb-0">

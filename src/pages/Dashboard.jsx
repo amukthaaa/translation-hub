@@ -39,7 +39,7 @@ export default function Dashboard() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-semibold text-slate-900">Status Dashboard</h2>
+          <h2 className="text-2xl font-medium text-slate-900">Status Dashboard</h2>
           <p className="text-sm text-slate-500 mt-1">
             {requests.length} total requests
             {overdueCount > 0 && (

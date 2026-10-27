@@ -74,7 +74,7 @@ export default function NewRequest() {
     return (
       <div className="max-w-xl mx-auto bg-white border border-slate-200 rounded-lg p-8 text-center">
         <CheckCircle2 className="h-12 w-12 text-emerald-500 mx-auto mb-4" />
-        <h2 className="text-xl font-semibold text-slate-900 mb-1">Request submitted</h2>
+        <h2 className="text-xl font-medium text-slate-900 mb-1">Request submitted</h2>
         <p className="text-sm text-slate-500 mb-6">
           {submitted} was created and is now in the Submitted queue.
         </p>
@@ -98,7 +98,7 @@ export default function NewRequest() {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <h2 className="text-2xl font-semibold text-slate-900 mb-1">New Translation Request</h2>
+      <h2 className="text-2xl font-medium text-slate-900 mb-1">New Translation Request</h2>
       <p className="text-sm text-slate-500 mb-6">Should take under 2 minutes to fill out.</p>
 
       <form onSubmit={handleSubmit} className="space-y-6">

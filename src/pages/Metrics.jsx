@@ -40,7 +40,7 @@ export default function Metrics() {
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold text-slate-900 mb-1">Metrics</h2>
+      <h2 className="text-2xl font-medium text-slate-900 mb-1">Metrics</h2>
       <p className="text-sm text-slate-500 mb-6">Translation volume, turnaround, spend, and platform utilization at a glance.</p>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
@@ -52,7 +52,7 @@ export default function Metrics() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white border border-slate-200 rounded-lg p-5">
-          <h3 className="text-sm font-semibold text-slate-700 mb-4">Volume by month (requests)</h3>
+          <h3 className="text-sm font-medium text-slate-700 mb-4">Volume by month (requests)</h3>
           <div className="space-y-3">
             {volume.map((v) => (
               <BarRow key={v.month} label={v.label} value={v.requests} max={maxVolume} />
@@ -61,7 +61,7 @@ export default function Metrics() {
         </div>
 
         <div className="bg-white border border-slate-200 rounded-lg p-5">
-          <h3 className="text-sm font-semibold text-slate-700 mb-4">Volume by month (word count)</h3>
+          <h3 className="text-sm font-medium text-slate-700 mb-4">Volume by month (word count)</h3>
           <div className="space-y-3">
             {volume.map((v) => (
               <BarRow key={v.month} label={v.label} value={v.words} max={maxWords} barClassName="bg-copeland-navy" />
@@ -71,7 +71,7 @@ export default function Metrics() {
 
         <div className="bg-white border border-slate-200 rounded-lg p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-slate-700">Average turnaround by language</h3>
+            <h3 className="text-sm font-medium text-slate-700">Average turnaround by language</h3>
             {overallAvgTurnaround !== null && (
               <span className="text-xs text-slate-400">overall avg {overallAvgTurnaround}d</span>
             )}
@@ -95,7 +95,7 @@ export default function Metrics() {
         </div>
 
         <div className="bg-white border border-slate-200 rounded-lg p-5">
-          <h3 className="text-sm font-semibold text-slate-700 mb-4">Requests by source system</h3>
+          <h3 className="text-sm font-medium text-slate-700 mb-4">Requests by source system</h3>
           <div className="space-y-3">
             {bySource.map((s) => (
               <BarRow key={s.source} label={s.source} value={s.count} max={maxSource} barClassName="bg-amber-500" />
@@ -104,7 +104,7 @@ export default function Metrics() {
         </div>
 
         <div className="bg-white border border-slate-200 rounded-lg p-5 lg:col-span-2">
-          <h3 className="text-sm font-semibold text-slate-700 mb-4">Platform utilization — requests per team</h3>
+          <h3 className="text-sm font-medium text-slate-700 mb-4">Platform utilization — requests per team</h3>
           <div className="space-y-3">
             {byTeam.map((t) => (
               <BarRow key={t.team} label={t.team} value={t.count} max={maxTeam} barClassName="bg-copeland-blue" />

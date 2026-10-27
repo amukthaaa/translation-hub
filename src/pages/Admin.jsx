@@ -25,7 +25,7 @@ export default function Admin() {
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold text-slate-900 mb-1">Admin</h2>
+      <h2 className="text-2xl font-medium text-slate-900 mb-1">Admin</h2>
       <p className="text-sm text-slate-500 mb-6">Manage users, roles, and reviewer assignments.</p>
 
       <div className="bg-white border border-slate-200 rounded-lg overflow-hidden mb-8">
@@ -88,7 +88,7 @@ export default function Admin() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white border border-slate-200 rounded-lg p-5">
-          <h3 className="text-sm font-semibold text-slate-700 mb-3">Reviewer assignments by language</h3>
+          <h3 className="text-sm font-medium text-slate-700 mb-3">Reviewer assignments by language</h3>
           <div className="space-y-2">
             {languages.map((l) => {
               const assigned = reviewerForLanguage(l.code);
@@ -116,7 +116,7 @@ export default function Admin() {
         </div>
 
         <div className="bg-white border border-slate-200 rounded-lg p-5">
-          <h3 className="text-sm font-semibold text-slate-700 mb-3">Role definitions</h3>
+          <h3 className="text-sm font-medium text-slate-700 mb-3">Role definitions</h3>
           <div className="space-y-3">
             {roles.map((r) => (
               <div key={r.name} className="border-b border-slate-100 last:border-0 pb-3 last:pb-0">

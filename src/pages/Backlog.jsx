@@ -9,7 +9,7 @@ const PRIORITY_STYLES = {
 export default function Backlog() {
   return (
     <div>
-      <h2 className="text-2xl font-semibold text-slate-900 mb-1">Backlog</h2>
+      <h2 className="text-2xl font-medium text-slate-900 mb-1">Backlog</h2>
       <p className="text-sm text-slate-500 mb-6">Prioritized user stories driving this prototype, with their success metric.</p>
 
       <div className="space-y-4">
