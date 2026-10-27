@@ -2,6 +2,7 @@ import { useUsers } from "../context/UsersContext";
 import roles from "../data/roles.json";
 import languages from "../data/languages.json";
 import Select from "../components/Select";
+import { AlertTriangle } from "lucide-react";
 
 const ROLE_NAMES = roles.map((r) => r.name);
 const languageName = (code) => languages.find((l) => l.code === code)?.name || code;
@@ -21,6 +22,13 @@ export default function UsersRoles() {
       const newReviewer = reviewers.find((r) => r.id === newReviewerId);
       updateReviewerAssignment(newReviewerId, { language: code, region: newReviewer?.region });
     }
+  };
+
+  const handleToggleActive = (u) => {
+    if (u.active && !window.confirm(`Deactivate ${u.name}? They will no longer be assignable to new work.`)) {
+      return;
+    }
+    toggleActive(u.id);
   };
 
   return (
@@ -70,7 +78,7 @@ export default function UsersRoles() {
                 </td>
                 <td className="px-4 py-3">
                   <button
-                    onClick={() => toggleActive(u.id)}
+                    onClick={() => handleToggleActive(u)}
                     className={`text-xs px-2 py-1 rounded-full border ${
                       u.active
                         ? "bg-emerald-50 text-emerald-700 border-emerald-200"
@@ -94,12 +102,21 @@ export default function UsersRoles() {
               const assigned = reviewerForLanguage(l.code);
               return (
                 <div key={l.code} className="flex items-center justify-between gap-3 text-sm">
-                  <span className="text-slate-600 w-40 shrink-0">{l.name}</span>
+                  <span className="text-slate-600 w-40 shrink-0 inline-flex items-center gap-1.5">
+                    {l.name}
+                    {!assigned && (
+                      <span title="No reviewer assigned">
+                        <AlertTriangle className="h-3.5 w-3.5 text-amber-500" />
+                      </span>
+                    )}
+                  </span>
                   <Select
                     value={assigned?.id ?? ""}
                     onChange={(e) => reassignReviewer(l.code, e.target.value || null)}
                     wrapperClassName="flex-1"
-                    className="w-full border border-slate-300 rounded-md pl-2 pr-7 py-1.5 text-sm"
+                    className={`w-full border rounded-md pl-2 pr-7 py-1.5 text-sm ${
+                      assigned ? "border-slate-300" : "border-amber-300 bg-amber-50 text-amber-800"
+                    }`}
                     chevronClassName="right-2"
                   >
                     <option value="">Unassigned</option>

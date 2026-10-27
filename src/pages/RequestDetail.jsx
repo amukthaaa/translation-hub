@@ -144,7 +144,7 @@ export default function RequestDetail() {
                       {role === "Content Owner" && l.status === "Approved" && (
                         <button
                           onClick={() => publishLanguage(request.id, l.code)}
-                          className="inline-flex items-center gap-1 text-xs bg-emerald-600 text-white px-2 py-1 rounded hover:bg-emerald-700"
+                          className="inline-flex items-center gap-1 text-xs bg-emerald-600 text-white px-2 py-1 hover:bg-emerald-700"
                         >
                           <Upload className="h-3 w-3" /> Publish
                         </button>

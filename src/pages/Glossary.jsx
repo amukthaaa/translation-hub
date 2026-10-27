@@ -90,7 +90,7 @@ export default function Glossary() {
               className="w-full border border-slate-300 rounded-md px-3 py-1.5 text-sm"
             />
           </div>
-          <button type="submit" className="bg-copeland-blue text-white px-4 py-1.5 rounded-md text-sm font-medium">
+          <button type="submit" className="bg-copeland-blue text-white px-4 py-1.5 text-sm font-medium">
             Add
           </button>
         </form>
@@ -116,7 +116,7 @@ export default function Glossary() {
               className="border border-slate-300 rounded-md px-3 py-1.5 text-sm"
             />
           </div>
-          <button type="submit" className="bg-copeland-blue text-white px-4 py-1.5 rounded-md text-sm font-medium">
+          <button type="submit" className="bg-copeland-blue text-white px-4 py-1.5 text-sm font-medium">
             Submit suggestion
           </button>
         </form>

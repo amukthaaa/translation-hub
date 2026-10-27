@@ -97,13 +97,13 @@ export default function NewRequest() {
         <div className="flex gap-3 justify-center">
           <button
             onClick={() => navigate(`/request/${submitted}`)}
-            className="bg-copeland-blue text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-copeland-navy"
+            className="bg-copeland-blue text-white px-4 py-2 text-sm font-medium hover:bg-copeland-navy"
           >
             View request
           </button>
           <button
             onClick={() => navigate("/my-requests")}
-            className="border border-slate-300 px-4 py-2 rounded-md text-sm font-medium text-slate-600 hover:bg-slate-50"
+            className="border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50"
           >
             Back to my requests
           </button>
@@ -258,7 +258,7 @@ export default function NewRequest() {
             <button
               type="submit"
               disabled={!canSubmit}
-              className="bg-copeland-blue text-white px-5 py-2.5 rounded-md text-sm font-medium hover:bg-copeland-navy disabled:bg-slate-300 disabled:cursor-not-allowed"
+              className="bg-copeland-blue text-white px-5 py-2.5 text-sm font-medium hover:bg-copeland-navy disabled:bg-slate-300 disabled:cursor-not-allowed"
             >
               Submit request
             </button>

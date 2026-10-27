@@ -30,7 +30,17 @@
         "code": "de",
         "status": "In Translation",
         "reviewer": "Katrin Vogel",
-        "cost": 6.66
+        "cost": 6.66,
+        "comments": [
+          {
+            "id": "c-seed-1",
+            "role": "Admin",
+            "author": "Admin",
+            "text": "The content owner updated this request's details.",
+            "ownerText": "You updated this request's details — the translator has been notified.",
+            "createdAt": "2026-10-24"
+          }
+        ]
       }
     ],
     "source": "PIM",
@@ -54,7 +64,16 @@
         "code": "pt-BR",
         "status": "In Translation",
         "reviewer": "Felipe Souza",
-        "cost": 3.64
+        "cost": 3.64,
+        "comments": [
+          {
+            "id": "c-seed-2",
+            "role": "Reviewer",
+            "author": "Felipe Souza",
+            "text": "Flagging early — please double check \"subcooling\" against the glossary once your draft is ready.",
+            "createdAt": "2026-10-25"
+          }
+        ]
       },
       {
         "translator": "Wei Chen",
@@ -234,7 +253,16 @@
         "code": "ko",
         "status": "In Translation",
         "reviewer": "Ji-won Park",
-        "cost": 5.32
+        "cost": 5.32,
+        "comments": [
+          {
+            "id": "c-seed-3",
+            "role": "Translator",
+            "author": "Soo-jin Kim",
+            "text": "This request is overdue — draft is in progress, expect to submit for review by end of day.",
+            "createdAt": "2026-10-26"
+          }
+        ]
       },
       {
         "translator": "Wei Chen",
