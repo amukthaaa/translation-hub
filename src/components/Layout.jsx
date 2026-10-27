@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { Globe2 } from "lucide-react";
+import copelandLogo from "../assets/copeland-logo.png";
 
 const navItems = [
   { to: "/dashboard", label: "Dashboard" },
@@ -14,10 +14,10 @@ export default function Layout() {
     <div className="min-h-screen flex flex-col">
       <header className="bg-copeland-navy text-white">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Globe2 className="h-6 w-6 text-blue-300" />
+          <div className="flex items-center gap-3">
+            <img src={copelandLogo} alt="Copeland" className="h-12 w-12 rounded-md" />
             <div>
-              <h1 className="text-lg font-semibold leading-tight">Copeland Translation Request Hub</h1>
+              <h1 className="text-lg font-semibold leading-tight">Translation Request Hub</h1>
               <p className="text-xs text-blue-200">Prototype</p>
             </div>
           </div>
