@@ -1,0 +1,6 @@
+[
+  { "code": "mt", "label": "Machine Translation", "description": "Raw machine output, no human review", "ratePerWord": 0.04 },
+  { "code": "standard", "label": "Standard", "description": "Machine translation with human post-editing", "ratePerWord": 0.1 },
+  { "code": "professional", "label": "Professional", "description": "Full human translation by a subject-matter linguist", "ratePerWord": 0.15 },
+  { "code": "certified", "label": "Certified", "description": "Professional translation plus certification for legal or regulatory use", "ratePerWord": 0.24 }
+]

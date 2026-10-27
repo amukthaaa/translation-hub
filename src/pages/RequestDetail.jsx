@@ -4,6 +4,7 @@ import { Upload } from "lucide-react";
 import { useGlossary } from "../context/GlossaryContext";
 import { useAuth } from "../context/AuthContext";
 import languages from "../data/languages.json";
+import translationLevels from "../data/translationLevels.json";
 import { findGlossaryMatches } from "../utils/glossary";
 import { deriveOverallStatus, canEditRequest } from "../utils/workflow";
 import HighlightedText from "../components/HighlightedText";
@@ -34,6 +35,7 @@ export default function RequestDetail() {
     );
   }
 
+  const levelInfo = translationLevels.find((t) => t.code === request.translationLevel);
   const targetCodes = request.languages.map((l) => l.code);
   const matches = findGlossaryMatches(request.sourceText, glossaryData);
   const distinctTerms = Array.from(new Map(matches.map((m) => [m.term, m])).values());
@@ -53,6 +55,7 @@ export default function RequestDetail() {
           </p>
           <p className="text-sm text-slate-400 mt-1">
             Source {request.source} · Order ref {request.orderRef} · Est. cost ${request.estimatedCost?.toFixed(2)}
+            {levelInfo && ` · ${levelInfo.label} ($${levelInfo.ratePerWord.toFixed(2)}/word)`}
           </p>
         </div>
         <div className="flex items-center gap-3 shrink-0">

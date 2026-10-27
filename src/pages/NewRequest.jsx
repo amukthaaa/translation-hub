@@ -5,7 +5,7 @@ import { useGlossary } from "../context/GlossaryContext";
 import { useAuth } from "../context/AuthContext";
 import languages from "../data/languages.json";
 import sources from "../data/sources.json";
-import costs from "../data/costs.json";
+import translationLevels from "../data/translationLevels.json";
 import { glossaryCoverage } from "../utils/glossary";
 import HighlightedText from "../components/HighlightedText";
 import Select from "../components/Select";
@@ -26,6 +26,7 @@ export default function NewRequest() {
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [source, setSource] = useState(sources[0].code);
+  const [translationLevel, setTranslationLevel] = useState("professional");
   const [screenshotUrl, setScreenshotUrl] = useState(null);
   const [screenshotName, setScreenshotName] = useState(null);
   const [submitted, setSubmitted] = useState(null);
@@ -39,12 +40,9 @@ export default function NewRequest() {
     [sourceText, selectedLanguages, glossary]
   );
 
-  const rateByCode = useMemo(() => Object.fromEntries(costs.map((c) => [c.code, c.ratePerWord])), []);
+  const levelRate = translationLevels.find((t) => t.code === translationLevel)?.ratePerWord ?? 0.15;
   const wordCount = sourceText.trim() ? sourceText.trim().split(/\s+/).filter(Boolean).length : 0;
-  const estimatedCostPreview = selectedLanguages.reduce(
-    (sum, code) => sum + wordCount * (rateByCode[code] ?? 0.15),
-    0
-  );
+  const estimatedCostPreview = selectedLanguages.length * wordCount * levelRate;
 
   const handleFileUpload = (e) => {
     const file = e.target.files?.[0];
@@ -79,6 +77,7 @@ export default function NewRequest() {
       priority,
       dueDate,
       source,
+      translationLevel,
       screenshotUrl,
       screenshotName,
       languageCodes: selectedLanguages,
@@ -193,6 +192,24 @@ export default function NewRequest() {
                   {sources.map((s) => (
                     <option key={s.code} value={s.code}>
                       {s.name}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+              <div className="sm:col-span-2">
+                <label className="flex items-center justify-between text-sm font-medium text-slate-700 mb-1">
+                  <span>Translation level</span>
+                  <span className="text-xs font-normal text-slate-400">${levelRate.toFixed(2)}/word</span>
+                </label>
+                <Select
+                  value={translationLevel}
+                  onChange={(e) => setTranslationLevel(e.target.value)}
+                  wrapperClassName="w-full"
+                  className="w-full border border-slate-300 rounded-md pl-3 pr-9 py-2 text-sm"
+                >
+                  {translationLevels.map((t) => (
+                    <option key={t.code} value={t.code}>
+                      {t.label}
                     </option>
                   ))}
                 </Select>

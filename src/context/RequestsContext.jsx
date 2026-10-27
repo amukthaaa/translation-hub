@@ -1,11 +1,13 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import initialRequests from "../data/requests.json";
 import costs from "../data/costs.json";
+import translationLevels from "../data/translationLevels.json";
 import users from "../data/users.json";
 
 const RequestsContext = createContext(null);
 
 const rateByCode = Object.fromEntries(costs.map((c) => [c.code, c.ratePerWord]));
+const levelRateByCode = Object.fromEntries(translationLevels.map((t) => [t.code, t.ratePerWord]));
 const reviewerByCode = Object.fromEntries(
   users.filter((u) => u.role === "Reviewer").map((u) => [u.language, u.name])
 );
@@ -35,8 +37,9 @@ export function RequestsProvider({ children }) {
   const addRequest = (draft) => {
     const id = `REQ-${nextIdCounter++}`;
     const words = wordCount(draft.sourceText);
+    const levelRate = levelRateByCode[draft.translationLevel];
     const languages = draft.languageCodes.map((code) => {
-      const rate = rateByCode[code] ?? 0.15;
+      const rate = levelRate ?? rateByCode[code] ?? 0.15;
       return {
         code,
         status: "Submitted",
@@ -131,9 +134,10 @@ export function RequestsProvider({ children }) {
 
         const sourceTextChanged = "sourceText" in patch && patch.sourceText !== r.sourceText;
         const words = sourceTextChanged ? wordCount(patch.sourceText) : r.wordCount;
+        const levelRate = levelRateByCode[r.translationLevel];
 
         const languages = r.languages.map((l) => {
-          const rate = rateByCode[l.code] ?? 0.15;
+          const rate = levelRate ?? rateByCode[l.code] ?? 0.15;
           const cost = sourceTextChanged ? round2(words * rate) : l.cost;
           if (l.status !== "In Translation") {
             return sourceTextChanged ? { ...l, cost } : l;
