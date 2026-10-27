@@ -78,6 +78,13 @@ export default function RequestDetail() {
             <HighlightedText text={request.sourceText} glossary={glossaryData} targetLanguageCodes={targetCodes} />
           </div>
 
+          {request.additionalComments && (
+            <div className="bg-white border border-slate-200 rounded-lg p-5">
+              <h3 className="text-sm font-medium text-slate-700 mb-2">Additional comments</h3>
+              <p className="text-sm text-slate-600 whitespace-pre-wrap">{request.additionalComments}</p>
+            </div>
+          )}
+
           {distinctTerms.length > 0 && (
             <div className="bg-white border border-slate-200 rounded-lg p-5">
               <h3 className="text-sm font-medium text-slate-700 mb-3">Glossary terms detected</h3>

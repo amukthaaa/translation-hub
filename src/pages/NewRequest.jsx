@@ -22,6 +22,7 @@ export default function NewRequest() {
   const [title, setTitle] = useState("");
   const [sourceText, setSourceText] = useState("");
   const [fileName, setFileName] = useState(null);
+  const [additionalComments, setAdditionalComments] = useState("");
   const [selectedLanguages, setSelectedLanguages] = useState([]);
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("Medium");
@@ -78,6 +79,7 @@ export default function NewRequest() {
       dueDate,
       source,
       translationLevel,
+      additionalComments: additionalComments.trim() || null,
       screenshotUrl,
       screenshotName,
       languageCodes: selectedLanguages,
@@ -149,6 +151,17 @@ export default function NewRequest() {
                 </label>
                 {fileName && <span className="text-xs text-slate-400">{fileName}</span>}
               </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Additional comments (optional)</label>
+              <textarea
+                value={additionalComments}
+                onChange={(e) => setAdditionalComments(e.target.value)}
+                rows={3}
+                placeholder="Any context, tone guidance, or notes for the translator and reviewer..."
+                className="w-full border border-slate-300 rounded-md px-3 py-2 text-sm"
+              />
             </div>
 
             <div>
