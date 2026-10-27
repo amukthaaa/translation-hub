@@ -84,30 +84,6 @@ export default function JobWorkspace() {
         <StatusBadge status={translatorStatusLabel(langEntry.status)} />
       </div>
 
-      {langEntry.comments?.length > 0 && (
-        <div className="bg-white border border-slate-200 rounded-lg p-5 mb-6">
-          <h3 className="text-sm font-medium text-slate-700 mb-3">Activity &amp; feedback</h3>
-          <CommentThread comments={langEntry.comments} />
-          <div className="mt-3 flex gap-2">
-            <input
-              type="text"
-              value={reply}
-              onChange={(e) => setReply(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleReply()}
-              placeholder="Reply to the reviewer..."
-              className="flex-1 border border-slate-300 rounded-md px-3 py-2 text-sm"
-            />
-            <button
-              onClick={handleReply}
-              disabled={!reply.trim()}
-              className="bg-copeland-blue text-white px-4 py-2 text-sm font-medium hover:bg-copeland-navy disabled:bg-slate-300"
-            >
-              Reply
-            </button>
-          </div>
-        </div>
-      )}
-
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white border border-slate-200 rounded-lg p-5">
@@ -153,6 +129,30 @@ export default function JobWorkspace() {
         </div>
 
         <div className="space-y-6">
+          {langEntry.comments?.length > 0 && (
+            <div className="bg-white border border-slate-200 rounded-lg p-5">
+              <h3 className="text-sm font-medium text-slate-700 mb-3">Activity &amp; feedback</h3>
+              <CommentThread comments={langEntry.comments} />
+              <div className="mt-3 flex gap-2">
+                <input
+                  type="text"
+                  value={reply}
+                  onChange={(e) => setReply(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleReply()}
+                  placeholder="Reply to the reviewer..."
+                  className="flex-1 border border-slate-300 rounded-md px-3 py-2 text-sm"
+                />
+                <button
+                  onClick={handleReply}
+                  disabled={!reply.trim()}
+                  className="bg-copeland-blue text-white px-4 py-2 text-sm font-medium hover:bg-copeland-navy disabled:bg-slate-300"
+                >
+                  Reply
+                </button>
+              </div>
+            </div>
+          )}
+
           {request.screenshot && (
             <div>
               <h3 className="text-sm font-medium text-slate-700 mb-2">Context screenshot</h3>

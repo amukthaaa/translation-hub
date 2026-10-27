@@ -142,7 +142,7 @@ export default function RequestDetail() {
                   </div>
                   {l.comments?.length > 0 && (
                     <div className="mt-2">
-                      <CommentThread comments={l.comments} />
+                      <CommentThread comments={l.comments} viewerRole={role} />
                     </div>
                   )}
                 </div>

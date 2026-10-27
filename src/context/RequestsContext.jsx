@@ -79,10 +79,10 @@ export function RequestsProvider({ children }) {
     );
   };
 
-  const appendComment = (l, { role, author, text }) => ({
+  const appendComment = (l, { role, author, text, ownerText }) => ({
     comments: [
       ...(l.comments || []),
-      { id: `c-${nextCommentId++}`, role, author, text, createdAt: today() },
+      { id: `c-${nextCommentId++}`, role, author, text, ownerText, createdAt: today() },
     ],
   });
 
@@ -137,11 +137,14 @@ export function RequestsProvider({ children }) {
             cost,
             needsAttention: true,
             ...appendComment(l, {
-              role: "System",
-              author: "System",
+              role: "Admin",
+              author: "Admin",
               text: sourceTextChanged
                 ? "The content owner updated the source text. Please review your draft against the revised content before submitting."
                 : "The content owner updated this request's details.",
+              ownerText: sourceTextChanged
+                ? "You updated the source text — the translator has been notified to review it before submitting."
+                : "You updated this request's details — the translator has been notified.",
             }),
           };
         });
