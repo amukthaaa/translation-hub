@@ -8,7 +8,7 @@ import sources from "../data/sources.json";
 import { deriveOverallStatus } from "../utils/workflow";
 import { AlertTriangle } from "lucide-react";
 
-const STATUSES = ["Submitted", "In Translation", "In Review", "Published"];
+const STATUSES = ["Submitted", "In Translation", "In Review", "Approved", "Published"];
 const TODAY = new Date();
 
 function isOverdue(request, overallStatus) {

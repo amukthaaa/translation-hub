@@ -3,6 +3,7 @@
 export function deriveOverallStatus(languages) {
   if (languages.length > 0 && languages.every((l) => l.status === "Published")) return "Published";
   if (languages.some((l) => l.status === "In Review" || l.status === "Changes Requested")) return "In Review";
+  if (languages.some((l) => l.status === "Approved")) return "Approved";
   if (languages.some((l) => l.status === "In Translation")) return "In Translation";
   return "Submitted";
 }
@@ -12,6 +13,7 @@ const TRANSLATOR_LABELS = {
   "In Translation": "In Progress",
   "In Review": "Submitted for Review",
   "Changes Requested": "Changes Requested",
+  Approved: "Approved",
   Published: "Published",
 };
 

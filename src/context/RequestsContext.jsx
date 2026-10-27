@@ -104,9 +104,13 @@ export function RequestsProvider({ children }) {
 
   const approveLanguage = (requestId, code) => {
     updateLanguage(requestId, code, {
-      status: "Published",
+      status: "Approved",
       completedAt: today(),
     });
+  };
+
+  const publishLanguage = (requestId, code) => {
+    updateLanguage(requestId, code, { status: "Published" });
   };
 
   const requestChanges = (requestId, code, comment, author) => {
@@ -178,6 +182,7 @@ export function RequestsProvider({ children }) {
       saveDraft,
       submitForReview,
       approveLanguage,
+      publishLanguage,
       requestChanges,
       replyToComment,
       updateRequest,

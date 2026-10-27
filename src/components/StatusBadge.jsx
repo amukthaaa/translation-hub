@@ -6,6 +6,7 @@ const STYLES = {
   "In Review": "bg-amber-100 text-amber-800 border-amber-300",
   "Submitted for Review": "bg-amber-100 text-amber-800 border-amber-300",
   "Changes Requested": "bg-red-100 text-red-700 border-red-300",
+  Approved: "bg-teal-100 text-teal-800 border-teal-300",
   Published: "bg-emerald-100 text-emerald-800 border-emerald-300",
 };
 

@@ -16,7 +16,7 @@ const SORT_OPTIONS = [
   { value: "priority", label: "Priority" },
 ];
 
-const STATUS_FILTERS = ["Submitted", "In Translation", "In Review", "Changes Requested", "Published"];
+const STATUS_FILTERS = ["Submitted", "In Translation", "In Review", "Changes Requested", "Approved", "Published"];
 const PRIORITY_FILTERS = ["High", "Medium", "Low"];
 
 const PRIORITY_ORDER = { High: 0, Medium: 1, Low: 2 };

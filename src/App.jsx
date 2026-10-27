@@ -12,6 +12,7 @@ import RequestDetail from "./pages/RequestDetail";
 import EditRequest from "./pages/EditRequest";
 import ReviewQueue from "./pages/ReviewQueue";
 import ReviewScreen from "./pages/ReviewScreen";
+import ReviewHistory from "./pages/ReviewHistory";
 import MyJobs from "./pages/MyJobs";
 import JobWorkspace from "./pages/JobWorkspace";
 import Glossary from "./pages/Glossary";
@@ -42,6 +43,7 @@ export default function App() {
                   <Route path="/request/:id/edit" element={<EditRequest />} />
                   <Route path="/review-queue" element={<ReviewQueue />} />
                   <Route path="/review/:id/:lang" element={<ReviewScreen />} />
+                  <Route path="/history" element={<ReviewHistory />} />
                   <Route path="/my-jobs" element={<MyJobs />} />
                   <Route path="/job/:id/:lang" element={<JobWorkspace />} />
                   <Route path="/glossary" element={<Glossary />} />

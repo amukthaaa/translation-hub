@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useRequests } from "../context/RequestsContext";
+import { Upload } from "lucide-react";
 import { useGlossary } from "../context/GlossaryContext";
 import { useAuth } from "../context/AuthContext";
 import languages from "../data/languages.json";
@@ -15,7 +16,7 @@ const languageName = (code) => languages.find((l) => l.code === code)?.name || c
 
 export default function RequestDetail() {
   const { id } = useParams();
-  const { requests } = useRequests();
+  const { requests, publishLanguage } = useRequests();
   const { terms: glossaryData } = useGlossary();
   const { role } = useAuth();
   const request = requests.find((r) => r.id === id);
@@ -138,7 +139,17 @@ export default function RequestDetail() {
                       <p className="text-xs text-slate-400">Translator: {l.translator || "Unassigned"}</p>
                       <p className="text-xs text-slate-400">${l.cost?.toFixed(2) ?? "0.00"}</p>
                     </div>
-                    <StatusBadge status={l.status} />
+                    <div className="flex flex-col items-end gap-1.5">
+                      <StatusBadge status={l.status} />
+                      {role === "Content Owner" && l.status === "Approved" && (
+                        <button
+                          onClick={() => publishLanguage(request.id, l.code)}
+                          className="inline-flex items-center gap-1 text-xs bg-emerald-600 text-white px-2 py-1 rounded hover:bg-emerald-700"
+                        >
+                          <Upload className="h-3 w-3" /> Publish
+                        </button>
+                      )}
+                    </div>
                   </div>
                   {l.comments?.length > 0 && (
                     <div className="mt-2">

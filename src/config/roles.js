@@ -12,6 +12,7 @@ export const ROLE_NAV = {
   ],
   Reviewer: [
     { to: "/review-queue", label: "Review Queue" },
+    { to: "/history", label: "History" },
     { to: "/glossary", label: "Glossary" },
   ],
   Translator: [{ to: "/my-jobs", label: "My Jobs" }],
@@ -27,7 +28,7 @@ export const ROLE_NAV = {
 
 export const ROLE_ALLOWED_PREFIXES = {
   "Content Owner": ["/my-requests", "/new-request", "/request"],
-  Reviewer: ["/review-queue", "/review", "/glossary"],
+  Reviewer: ["/review-queue", "/review", "/history", "/glossary"],
   Translator: ["/my-jobs", "/job"],
   Admin: ["/admin-dashboard", "/all-requests", "/metrics", "/users-roles", "/glossary", "/backlog", "/request"],
 };

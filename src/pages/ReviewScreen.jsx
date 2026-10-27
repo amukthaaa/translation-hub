@@ -37,6 +37,7 @@ export default function ReviewScreen() {
   }
 
   const mismatches = findTranslationMismatches(request.sourceText, langEntry.translatedText, glossary, lang);
+  const isDecided = langEntry.status === "Approved" || langEntry.status === "Published";
 
   const handleApprove = () => {
     approveLanguage(request.id, lang);
@@ -117,36 +118,45 @@ export default function ReviewScreen() {
 
           <div className="bg-white border border-slate-200 rounded-lg p-5 space-y-3">
             <h3 className="text-sm font-medium text-slate-700">Actions</h3>
-            <button
-              onClick={handleApprove}
-              className="w-full bg-emerald-600 text-white px-4 py-2 text-sm font-medium hover:bg-emerald-700"
-            >
-              Approve
-            </button>
-            {!showCommentBox ? (
-              <button
-                onClick={() => setShowCommentBox(true)}
-                className="w-full border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50"
-              >
-                Request changes
-              </button>
+            {isDecided ? (
+              <p className="text-sm text-slate-500 inline-flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-teal-600" />
+                You approved this on {langEntry.completedAt}.
+              </p>
             ) : (
-              <div className="space-y-2">
-                <textarea
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  placeholder="What needs to change?"
-                  rows={3}
-                  className="w-full border border-slate-300 rounded-md px-3 py-2 text-sm"
-                />
+              <>
                 <button
-                  onClick={handleRequestChanges}
-                  disabled={!comment.trim()}
-                  className="w-full bg-red-600 text-white px-4 py-2 text-sm font-medium hover:bg-red-700 disabled:bg-slate-300"
+                  onClick={handleApprove}
+                  className="w-full bg-emerald-600 text-white px-4 py-2 text-sm font-medium hover:bg-emerald-700"
                 >
-                  Send request for changes
+                  Approve
                 </button>
-              </div>
+                {!showCommentBox ? (
+                  <button
+                    onClick={() => setShowCommentBox(true)}
+                    className="w-full border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50"
+                  >
+                    Request changes
+                  </button>
+                ) : (
+                  <div className="space-y-2">
+                    <textarea
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      placeholder="What needs to change?"
+                      rows={3}
+                      className="w-full border border-slate-300 rounded-md px-3 py-2 text-sm"
+                    />
+                    <button
+                      onClick={handleRequestChanges}
+                      disabled={!comment.trim()}
+                      className="w-full bg-red-600 text-white px-4 py-2 text-sm font-medium hover:bg-red-700 disabled:bg-slate-300"
+                    >
+                      Send request for changes
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </div>
 
