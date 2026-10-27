@@ -31,7 +31,7 @@ export default function Layout() {
                 to={item.to}
                 end={item.end}
                 className={({ isActive }) =>
-                  `px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  `px-4 py-2 text-sm font-medium transition-colors ${
                     isActive ? "bg-white text-copeland-navy" : "text-blue-100 hover:bg-white/10"
                   }`
                 }
