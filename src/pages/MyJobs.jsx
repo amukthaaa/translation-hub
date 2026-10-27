@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import StatusBadge from "../components/StatusBadge";
 import { translatorStatusLabel } from "../utils/workflow";
 import languages from "../data/languages.json";
+import { BellRing } from "lucide-react";
 
 const languageName = (code) => languages.find((l) => l.code === code)?.name || code;
 
@@ -22,6 +23,7 @@ export default function MyJobs() {
       }
     }
     return items.sort((a, b) => {
+      if (!!a.lang.needsAttention !== !!b.lang.needsAttention) return a.lang.needsAttention ? -1 : 1;
       const aDone = a.lang.status === "Published";
       const bDone = b.lang.status === "Published";
       if (aDone !== bDone) return aDone ? 1 : -1;
@@ -49,9 +51,16 @@ export default function MyJobs() {
             {jobs.map(({ request, lang }) => (
               <tr key={`${request.id}-${lang.code}`} className="border-b border-slate-100 last:border-0 hover:bg-slate-50">
                 <td className="px-4 py-3">
-                  <Link to={`/job/${request.id}/${lang.code}`} className="font-medium text-copeland-blue hover:underline">
-                    {request.title}
-                  </Link>
+                  <div className="flex items-center gap-2">
+                    <Link to={`/job/${request.id}/${lang.code}`} className="font-medium text-copeland-blue hover:underline">
+                      {request.title}
+                    </Link>
+                    {lang.needsAttention && (
+                      <span className="inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-100 text-amber-800 px-2 py-0.5 text-xs font-medium whitespace-nowrap">
+                        <BellRing className="h-3 w-3" /> Updated
+                      </span>
+                    )}
+                  </div>
                   <div className="text-xs text-slate-400">{request.id}</div>
                 </td>
                 <td className="px-4 py-3 text-slate-600">English → {languageName(lang.code)}</td>

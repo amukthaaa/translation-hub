@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import MyRequests from "./pages/MyRequests";
 import NewRequest from "./pages/NewRequest";
 import RequestDetail from "./pages/RequestDetail";
+import EditRequest from "./pages/EditRequest";
 import ReviewQueue from "./pages/ReviewQueue";
 import ReviewScreen from "./pages/ReviewScreen";
 import MyJobs from "./pages/MyJobs";
@@ -38,6 +39,7 @@ export default function App() {
                   <Route path="/my-requests" element={<MyRequests />} />
                   <Route path="/new-request" element={<NewRequest />} />
                   <Route path="/request/:id" element={<RequestDetail />} />
+                  <Route path="/request/:id/edit" element={<EditRequest />} />
                   <Route path="/review-queue" element={<ReviewQueue />} />
                   <Route path="/review/:id/:lang" element={<ReviewScreen />} />
                   <Route path="/my-jobs" element={<MyJobs />} />

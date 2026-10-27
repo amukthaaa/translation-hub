@@ -16,7 +16,7 @@ const languageName = (code) => languages.find((l) => l.code === code)?.name || c
 
 export default function JobWorkspace() {
   const { id, lang } = useParams();
-  const { requests, saveDraft, submitForReview, replyToComment } = useRequests();
+  const { requests, saveDraft, submitForReview, replyToComment, acknowledgeUpdate } = useRequests();
   const { terms: glossary } = useGlossary();
   const { persona } = useAuth();
   const navigate = useNavigate();
@@ -29,6 +29,13 @@ export default function JobWorkspace() {
   useEffect(() => {
     setText(langEntry?.translatedText || "");
   }, [langEntry?.translatedText]);
+
+  useEffect(() => {
+    if (request && langEntry?.needsAttention) {
+      acknowledgeUpdate(request.id, lang);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [request?.id, lang, langEntry?.needsAttention]);
 
   if (!request || !langEntry) {
     return (
@@ -79,7 +86,7 @@ export default function JobWorkspace() {
 
       {langEntry.comments?.length > 0 && (
         <div className="bg-white border border-slate-200 rounded-lg p-5 mb-6">
-          <h3 className="text-sm font-medium text-slate-700 mb-3">Reviewer feedback</h3>
+          <h3 className="text-sm font-medium text-slate-700 mb-3">Activity &amp; feedback</h3>
           <CommentThread comments={langEntry.comments} />
           <div className="mt-3 flex gap-2">
             <input

@@ -19,6 +19,14 @@ export function translatorStatusLabel(status) {
   return TRANSLATOR_LABELS[status] || status;
 }
 
+// A request's shared fields (title, source text, deadline, priority...) can only be
+// edited by the Content Owner while every language is still pre-review — once any
+// language reaches In Review/Changes Requested/Published, a translator or reviewer is
+// already relying on the current text, so edits are locked.
+export function canEditRequest(request) {
+  return request.languages.every((l) => l.status === "Submitted" || l.status === "In Translation");
+}
+
 import { findGlossaryMatches } from "./glossary";
 
 // Flags glossary terms detected in the source whose approved translation does not

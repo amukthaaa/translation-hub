@@ -4,7 +4,7 @@ import { useGlossary } from "../context/GlossaryContext";
 import { useAuth } from "../context/AuthContext";
 import languages from "../data/languages.json";
 import { findGlossaryMatches } from "../utils/glossary";
-import { deriveOverallStatus } from "../utils/workflow";
+import { deriveOverallStatus, canEditRequest } from "../utils/workflow";
 import HighlightedText from "../components/HighlightedText";
 import ScreenshotPlaceholder from "../components/ScreenshotPlaceholder";
 import StatusBadge from "../components/StatusBadge";
@@ -54,7 +54,17 @@ export default function RequestDetail() {
             Source {request.source} · Order ref {request.orderRef} · Est. cost ${request.estimatedCost?.toFixed(2)}
           </p>
         </div>
-        <StatusBadge status={deriveOverallStatus(request.languages)} />
+        <div className="flex items-center gap-3 shrink-0">
+          {role === "Content Owner" && canEditRequest(request) && (
+            <Link
+              to={`/request/${request.id}/edit`}
+              className="border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-50"
+            >
+              Edit
+            </Link>
+          )}
+          <StatusBadge status={deriveOverallStatus(request.languages)} />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -118,6 +118,49 @@ export function RequestsProvider({ children }) {
     updateLanguage(requestId, code, (l) => appendComment(l, { role: "Translator", author, text }));
   };
 
+  const updateRequest = (requestId, patch) => {
+    setRequests((prev) =>
+      prev.map((r) => {
+        if (r.id !== requestId) return r;
+
+        const sourceTextChanged = "sourceText" in patch && patch.sourceText !== r.sourceText;
+        const words = sourceTextChanged ? wordCount(patch.sourceText) : r.wordCount;
+
+        const languages = r.languages.map((l) => {
+          const rate = rateByCode[l.code] ?? 0.15;
+          const cost = sourceTextChanged ? round2(words * rate) : l.cost;
+          if (l.status !== "In Translation") {
+            return sourceTextChanged ? { ...l, cost } : l;
+          }
+          return {
+            ...l,
+            cost,
+            needsAttention: true,
+            ...appendComment(l, {
+              role: "System",
+              author: "System",
+              text: sourceTextChanged
+                ? "The content owner updated the source text. Please review your draft against the revised content before submitting."
+                : "The content owner updated this request's details.",
+            }),
+          };
+        });
+
+        return {
+          ...r,
+          ...patch,
+          wordCount: words,
+          estimatedCost: round2(languages.reduce((sum, l) => sum + l.cost, 0)),
+          languages,
+        };
+      })
+    );
+  };
+
+  const acknowledgeUpdate = (requestId, code) => {
+    updateLanguage(requestId, code, { needsAttention: false });
+  };
+
   const value = useMemo(
     () => ({
       requests,
@@ -127,6 +170,8 @@ export function RequestsProvider({ children }) {
       approveLanguage,
       requestChanges,
       replyToComment,
+      updateRequest,
+      acknowledgeUpdate,
     }),
     [requests]
   );
