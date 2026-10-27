@@ -82,13 +82,6 @@ export default function ReviewScreen() {
             </div>
           </div>
 
-          {langEntry.comments?.length > 0 && (
-            <div className="bg-white border border-slate-200 rounded-lg p-5">
-              <h3 className="text-sm font-medium text-slate-700 mb-3">Conversation</h3>
-              <CommentThread comments={langEntry.comments} />
-            </div>
-          )}
-
           <div className="bg-white border border-slate-200 rounded-lg p-5">
             <h3 className="text-sm font-medium text-slate-700 mb-3">Glossary term check</h3>
             {mismatches.length === 0 ? (
@@ -156,6 +149,13 @@ export default function ReviewScreen() {
               </div>
             )}
           </div>
+
+          {langEntry.comments?.length > 0 && (
+            <div className="bg-white border border-slate-200 rounded-lg p-5">
+              <h3 className="text-sm font-medium text-slate-700 mb-3">Conversation</h3>
+              <CommentThread comments={langEntry.comments} />
+            </div>
+          )}
         </div>
       </div>
     </div>
