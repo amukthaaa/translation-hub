@@ -22,6 +22,7 @@ export default function RequestsTable({
   requests,
   title,
   showOwnerColumn = true,
+  showCreatedColumn = false,
   showNewRequestButton = false,
   showOnboardingNote = false,
 }) {
@@ -118,6 +119,7 @@ export default function RequestsTable({
               <th className="px-4 py-3 font-medium">Source</th>
               <th className="px-4 py-3 font-medium">Languages</th>
               {showOwnerColumn && <th className="px-4 py-3 font-medium">Owner</th>}
+              {showCreatedColumn && <th className="px-4 py-3 font-medium">Created</th>}
               <th className="px-4 py-3 font-medium">Due Date</th>
               <th className="px-4 py-3 font-medium">Est. Cost</th>
               <th className="px-4 py-3 font-medium">Status</th>
@@ -137,6 +139,7 @@ export default function RequestsTable({
                   <td className="px-4 py-3 text-slate-600">{r.source}</td>
                   <td className="px-4 py-3 text-slate-600">{r.languages.map((l) => l.code).join(", ")}</td>
                   {showOwnerColumn && <td className="px-4 py-3 text-slate-600">{r.owner}</td>}
+                  {showCreatedColumn && <td className="px-4 py-3 text-slate-600">{r.createdAt}</td>}
                   <td className={`px-4 py-3 ${overdue ? "text-red-600 font-semibold" : "text-slate-600"}`}>
                     {r.dueDate}
                     {overdue && " (overdue)"}
@@ -150,7 +153,10 @@ export default function RequestsTable({
             })}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={showOwnerColumn ? 7 : 6} className="px-4 py-10 text-center text-slate-400">
+                <td
+                  colSpan={6 + (showOwnerColumn ? 1 : 0) + (showCreatedColumn ? 1 : 0)}
+                  className="px-4 py-10 text-center text-slate-400"
+                >
                   No requests match these filters.
                 </td>
               </tr>
