@@ -5,18 +5,10 @@ import MetricCard from "../components/MetricCard";
 import languages from "../data/languages.json";
 import { deriveOverallStatus } from "../utils/workflow";
 import { overallAvgTurnaroundDays, monthlySpend } from "../utils/metrics";
-import { AlertTriangle, ClipboardList, BarChart3, Users, BookOpen, ListTodo, ArrowRight } from "lucide-react";
+import { AlertTriangle, ArrowRight } from "lucide-react";
 
 const TODAY = new Date();
 const CURRENT_MONTH = TODAY.toISOString().slice(0, 7);
-
-const QUICK_LINKS = [
-  { to: "/all-requests", label: "All Requests", icon: ClipboardList },
-  { to: "/metrics", label: "Metrics", icon: BarChart3 },
-  { to: "/users-roles", label: "Users & Roles", icon: Users },
-  { to: "/glossary", label: "Glossary", icon: BookOpen },
-  { to: "/backlog", label: "Backlog", icon: ListTodo },
-];
 
 const ROLE_DOT = {
   Reviewer: "bg-red-400",
@@ -67,19 +59,6 @@ export default function AdminDashboard() {
         <MetricCard label="Overdue requests" value={allOverdue.length} />
         <MetricCard label="Average turnaround" value={avgTurnaround !== null ? `${avgTurnaround}d` : "—"} />
         <MetricCard label="Spend this month" value={`$${spend.toLocaleString(undefined, { minimumFractionDigits: 2 })}`} />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-2 mb-6">
-        {QUICK_LINKS.map(({ to, label, icon: Icon }) => (
-          <Link
-            key={to}
-            to={to}
-            className="bg-white border border-slate-200 rounded-lg p-3 flex items-center gap-2 text-sm font-medium text-slate-700 hover:border-copeland-blue hover:text-copeland-blue transition-colors"
-          >
-            <Icon className="h-4 w-4 shrink-0" />
-            {label}
-          </Link>
-        ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
