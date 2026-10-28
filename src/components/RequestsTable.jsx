@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import StatusBadge from "./StatusBadge";
-import OnboardingNote from "./OnboardingNote";
 import Select from "./Select";
 import languages from "../data/languages.json";
 import sources from "../data/sources.json";
@@ -24,7 +23,6 @@ export default function RequestsTable({
   showOwnerColumn = true,
   showCreatedColumn = false,
   showNewRequestButton = false,
-  showOnboardingNote = false,
 }) {
   const [statusFilter, setStatusFilter] = useState("All");
   const [languageFilter, setLanguageFilter] = useState("All");
@@ -69,8 +67,6 @@ export default function RequestsTable({
           </Link>
         )}
       </div>
-
-      {showOnboardingNote && <OnboardingNote />}
 
       <div className="flex gap-3 mb-4">
         <Select

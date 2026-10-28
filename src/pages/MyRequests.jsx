@@ -15,7 +15,6 @@ export default function MyRequests() {
       title="My Requests"
       showOwnerColumn={false}
       showNewRequestButton
-      showOnboardingNote
     />
   );
 }
