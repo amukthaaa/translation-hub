@@ -43,7 +43,7 @@ export default function Login() {
         </div>
 
         <p className="text-xs text-slate-400 mt-10">
-          Prototype — no real authentication. Each card signs you in as that mock user.
+          Prototype only, each card signs you in as a mock user.
         </p>
       </div>
     </div>
